@@ -3,15 +3,9 @@ package com.piyush.companyservice.Entities;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -22,10 +16,7 @@ public class Ipo {
     @Id
     private Integer id;
 
-    @ManyToOne(cascade =CascadeType.ALL , fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("ipos")
-    @JsonIgnore
-    private Company company;
+    private Integer companyCode;
 
     private Integer stockCode;
 
@@ -37,15 +28,16 @@ public class Ipo {
 
     private String remarks;
 
-    public Ipo(Integer id, Integer stockCode, Double pricePerShare, Date date, String remarks) {
+    public Ipo() {
+    }
+
+    public Ipo(Integer id, Integer companyCode, Integer stockCode, Double pricePerShare, Date date, String remarks) {
         this.id = id;
+        this.companyCode = companyCode;
         this.stockCode = stockCode;
         this.pricePerShare = pricePerShare;
         this.date = date;
         this.remarks = remarks;
-    }
-
-    public Ipo() {
     }
 
     public Integer getId() {
@@ -56,12 +48,12 @@ public class Ipo {
         this.id = id;
     }
 
-    public Company getCompany() {
-        return company;
+    public Integer getCompanyCode() {
+        return companyCode;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompanyCode(Integer companyCode) {
+        this.companyCode = companyCode;
     }
 
     public Integer getStockCode() {
@@ -95,5 +87,7 @@ public class Ipo {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+
+    
       
 }

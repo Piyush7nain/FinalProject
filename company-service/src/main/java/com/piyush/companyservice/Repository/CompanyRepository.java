@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CompanyRepository extends JpaRepository<Company, Integer> {
-    
-    public Company findCompanyByCompanyName(String companyName);
+public interface CompanyRepository extends JpaRepository<Company, Integer>{
 
-    public List<Company> findByCompanyNameIgnoreCaseContaining(String companyName);
+    List<Company> findByCompanyNameContaining(String name);
+
+	Company findByCompanyName(String name);
+    
 }

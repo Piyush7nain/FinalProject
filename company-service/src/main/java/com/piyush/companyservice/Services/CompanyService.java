@@ -4,18 +4,20 @@ import java.util.List;
 
 import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.StockPrices;
-
+import com.piyush.models.Dates;
 
 public interface CompanyService {
 
-	List<Company> getCompanyByLikeName(String name);
-
-	Company getCompanyById(Integer id);
-
 	List<Company> getAllCompany();
 
-	List<StockPrices> getStockPrice(String name);
+	List<Company> getCompanyByLikeName(String name);
 
-	List<StockPrices> getAllStockPrice();
+	Company addCompany(Company company);
+
+	List<StockPrices> getAllStockPricesByName(String name);
+
+	List<StockPrices> getStockPriceByCompanyStockEx(String name, Integer stockCode);
+
+	List<StockPrices> getStockPricesByRange(Dates dates, String name);
     
 }

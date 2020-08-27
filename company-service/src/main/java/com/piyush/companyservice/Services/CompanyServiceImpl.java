@@ -2,64 +2,62 @@ package com.piyush.companyservice.Services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.StockPrices;
+import com.piyush.companyservice.Repository.CodesRepository;
 import com.piyush.companyservice.Repository.CompanyRepository;
-import com.piyush.companyservice.Repository.StockPriceRepository;
+import com.piyush.companyservice.Repository.StockPricesRepository;
+import com.piyush.models.Dates;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
+    @Autowired
     CompanyRepository companyRepository;
+    @Autowired
+    private CodesRepository codesRepository;
+    @Autowired
+    private StockPricesRepository stockPriceRepository;
 
-    StockPriceRepository stockPriceRepository;
-
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    public CompanyServiceImpl(CompanyRepository companyRepository, StockPriceRepository stockPriceRepository) {
-        this.companyRepository = companyRepository;
-        this.stockPriceRepository = stockPriceRepository;
+    @Override
+    public List<Company> getAllCompany() {
+        return companyRepository.findAll();
     }
 
     @Override
     public List<Company> getCompanyByLikeName(String name) {
-        List<Company> company = companyRepository.findByCompanyNameIgnoreCaseContaining(name);
-        //logger.info("Company by id -> {}", company);
-        return company;
+        return companyRepository.findByCompanyNameContaining(name);
     }
 
     @Override
-    public Company getCompanyById(Integer id) {
-        Company company = companyRepository.findById(id).get();
-        logger.info("Company by id -> {}", company);
-        return company;
+    public Company addCompany(Company company) {
+        return companyRepository.save(company);
     }
 
     @Override
-    public List<Company> getAllCompany() {
-        List<Company> company = companyRepository.findAll();
-        logger.info("Company by id -> {}", company);
-        return company;
+    public List<StockPrices> getAllStockPricesByName(String name) {
+        Integer id = companyRepository.findByCompanyName(name).getid();
+        List<Integer> codes = codesRepository.findByCompanyId(id);
+        List<StockPrices> stocks = stockPriceRepository.findByCompanyCodeInOrderByDate(codes);
+        return stocks;
     }
 
     @Override
-    @Transactional
-    public List<StockPrices> getStockPrice(String name) {
-        Integer code = companyRepository.findCompanyByCompanyName(name).getId();
-        logger.info("Company code -> {}", code );
-        return stockPriceRepository.findByCompany(code) ;
+    public List<StockPrices> getStockPriceByCompanyStockEx(String name, Integer stockCode) {
+        Integer id = companyRepository.findByCompanyName(name).getid();
+        Integer code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
+        return stockPriceRepository.findByCompanyCodeOrderByDate(code);
     }
 
     @Override
-    public List<StockPrices> getAllStockPrice() {
-        return stockPriceRepository.findAllByOrderByDate();
-    }
+    public List<StockPrices> getStockPricesByRange(Dates dates, String name) {
 
+        Integer id = companyRepository.findByCompanyName(name).getid();
+        List<Integer> codes = codesRepository.findByCompanyId(id);
+        return stockPriceRepository.findStockInRange(codes,dates.getStartDate(), dates.getEndDate());
+    }
     
 }

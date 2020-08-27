@@ -2,15 +2,9 @@ package com.piyush.companyservice.Entities;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -21,10 +15,8 @@ public class StockPrices {
     @Id
     private Integer id;
 
-    @ManyToOne(cascade =CascadeType.ALL , fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("stockPrices")
-    @JsonIgnore
-    private Company company;
+    
+    private Integer companyCode;
 
     private Integer StockCode;
 
@@ -37,13 +29,6 @@ public class StockPrices {
 	public StockPrices() {
 	}
 
-	public StockPrices(Integer id, Company company, Integer stockCode, Double pricePerShare, Date date) {
-		this.id = id;
-		this.company = company;
-		this.StockCode = stockCode;
-		this.currentPrice = pricePerShare;
-		this.date = date;
-    }
 
 	public Integer getId() {
 		return id;
@@ -53,13 +38,7 @@ public class StockPrices {
 		this.id = id;
 	}
 
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
+	
 
 	public Integer getStockCode() {
 		return StockCode;
@@ -84,8 +63,39 @@ public class StockPrices {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-    
-    
 
-    
+
+
+	public StockPrices(Integer id, Integer companyCode, Integer stockCode, Double currentPrice, Date date) {
+		this.id = id;
+		this.companyCode = companyCode;
+		StockCode = stockCode;
+		this.currentPrice = currentPrice;
+		this.date = date;
+	}
+
+
+
+	public Integer getCompanyCode() {
+		return companyCode;
+	}
+
+
+
+	public void setCompanyCode(Integer companyCode) {
+		this.companyCode = companyCode;
+	}
+
+
+
+	public Double getCurrentPrice() {
+		return currentPrice;
+	}
+
+
+
+	public void setCurrentPrice(Double currentPrice) {
+		this.currentPrice = currentPrice;
+	}
+       
 }

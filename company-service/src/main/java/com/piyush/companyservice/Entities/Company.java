@@ -3,21 +3,19 @@ package com.piyush.companyservice.Entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Company {
 
     @Id
-    @Column(name = "code")
-    private Integer code;
+    @Column(name = "id")
+    private Integer id;
     
     @Column(name ="company_name", nullable = false)
     private String companyName;
@@ -28,17 +26,14 @@ public class Company {
     @Column(name ="company_details")
     private String companyDetails;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("company")
+    @JsonIgnore
+    @Transient
     private List<StockPrices> stockPrices;
 
-    public Integer getId() {
-        return code;
-    }
+    @JsonIgnore
+    @Transient
+    private List<Ipo> ipos;
 
-    public void setId(Integer id) {
-        this.code = id;
-    }
 
     public String getCompanyName() {
         return companyName;
@@ -68,7 +63,7 @@ public class Company {
     }
 
     public Company(Integer id, String companyName, double turnover, String companyDetails) {
-        this.code = id;
+        this.id = id;
         this.companyName = companyName;
         this.turnover = turnover;
         this.companyDetails = companyDetails;
@@ -82,11 +77,34 @@ public class Company {
         this.stockPrices.add( stockPrices);
     }
 
-    /* @Override
+    
+
+
+    @Override
     public String toString() {
-        return "Company [code=" + code + ", companyDetails=" + companyDetails + ", companyName=" + companyName
+        return "Company [id=" + id + ", companyDetails=" + companyDetails + ", companyName=" + companyName
                 + ", turnover=" + turnover + "]";
-    } */
+    }
+
+    public Integer getid() {
+        return id;
+    }
+
+    public void setid(Integer id) {
+        this.id = id;
+    }
+
+    public void setStockPrices(List<StockPrices> stockPrices) {
+        this.stockPrices = stockPrices;
+    }
+
+    public List<Ipo> getIpos() {
+        return ipos;
+    }
+
+    public void setIpos(List<Ipo> ipos) {
+        this.ipos = ipos;
+    }
 
     
     
