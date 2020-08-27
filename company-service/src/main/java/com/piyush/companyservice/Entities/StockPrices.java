@@ -18,7 +18,7 @@ public class StockPrices {
     
     private Integer companyCode;
 
-    private Integer StockCode;
+    private Integer stockCode;
 
     private Double currentPrice;
 
@@ -41,11 +41,11 @@ public class StockPrices {
 	
 
 	public Integer getStockCode() {
-		return StockCode;
+		return stockCode;
 	}
 
 	public void setStockCode(Integer stockCode) {
-		StockCode = stockCode;
+		this.stockCode = stockCode;
 	}
 
 	public Double getPricePerShare() {
@@ -69,7 +69,7 @@ public class StockPrices {
 	public StockPrices(Integer id, Integer companyCode, Integer stockCode, Double currentPrice, Date date) {
 		this.id = id;
 		this.companyCode = companyCode;
-		StockCode = stockCode;
+		this.stockCode = stockCode;
 		this.currentPrice = currentPrice;
 		this.date = date;
 	}

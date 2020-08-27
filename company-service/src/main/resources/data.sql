@@ -10,9 +10,7 @@ INSERT INTO COMPANY_STOCK_CODES( company_id, stock_code, company_code) VALUES (1
 INSERT INTO STOCK_PRICES(id, company_code,at_time,stock_code, current_price ) VALUES ( 12, 1110,'2020-11-19', 1111, 100);
 INSERT INTO STOCK_PRICES(id, company_code,at_time,stock_code, current_price ) VALUES ( 13, 2110,'2020-10-19', 2222, 100);
 
--- INSERT INTO IPO(id, company_code, open_date, stock_code,price_per_share, remarks) VALUES (123, 1234, '2020-09-09',12345, 1000, 'remarks');
--- INSERT INTO IPO(id, company_code, open_date, stock_code,price_per_share, remarks) VALUES (1245, 1234, '2020-08-08',123987, 1000, 'remarks');
+INSERT INTO IPO(id, company_code, open_date, stock_code,price_per_share, remarks) VALUES (123, 1110, '2020-09-09',1111, 1000, 'remarks');
+INSERT INTO IPO(id, company_code, open_date, stock_code,price_per_share, remarks) VALUES (1245, 2110, '2020-08-08',2222, 1000, 'remarks');
 
--- INSERT INTO COMPANY_STOCK_CODES(company_id, stock_code, company_code) VALUES (1234, 567, 1234);
--- INSERT INTO COMPANY_STOCK_CODES(company_id, stock_code, company_code) VALUES (1234, 568, 12345);
--- INSERT INTO COMPANY_STOCK_CODES(company_id, stock_code, company_code) VALUES (1235, 567, 1111)
+

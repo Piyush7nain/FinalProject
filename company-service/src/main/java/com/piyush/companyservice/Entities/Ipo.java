@@ -28,6 +28,8 @@ public class Ipo {
 
     private String remarks;
 
+
+    
     public Ipo() {
     }
 
