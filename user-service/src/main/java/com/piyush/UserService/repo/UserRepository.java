@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.piyush.UserService.model.User;
 
-@Repository
+@Repository 
 public interface UserRepository extends JpaRepository<User,Integer> {
 	public User findUserByUserId(String userId);
 }
