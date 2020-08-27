@@ -18,7 +18,7 @@ public class Ipo {
 
     private Integer companyCode;
 
-    private Integer stockCode;
+    private String stockCode;
 
     private Double pricePerShare;
 
@@ -33,7 +33,7 @@ public class Ipo {
     public Ipo() {
     }
 
-    public Ipo(Integer id, Integer companyCode, Integer stockCode, Double pricePerShare, Date date, String remarks) {
+    public Ipo(Integer id, Integer companyCode, String stockCode, Double pricePerShare, Date date, String remarks) {
         this.id = id;
         this.companyCode = companyCode;
         this.stockCode = stockCode;
@@ -58,11 +58,11 @@ public class Ipo {
         this.companyCode = companyCode;
     }
 
-    public Integer getStockCode() {
+    public String getStockCode() {
         return stockCode;
     }
 
-    public void setStockCode(Integer stockCode) {
+    public void setStockCode(String stockCode) {
         this.stockCode = stockCode;
     }
 

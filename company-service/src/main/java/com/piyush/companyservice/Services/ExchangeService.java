@@ -14,14 +14,14 @@ public interface ExchangeService {
 
 	List<StockExchange> getExchange();
 
-	StockExchange getExchangeById(Integer id);
+	StockExchange getExchangeById(String id);
 
 	String addCompanyToExchange(CompanyStockCodes csc);
 
-	List<Company> getAllCompanies(Integer id);
+	List<Company> getAllCompanies(String id);
 
-	List<StockPrices> getAllStocks(Integer id);
+	List<StockPrices> getAllStocks(String id);
 
-	List<Ipo> getAllIpos(Integer id);
+	List<Ipo> getAllIpos(String id);
 
 }

@@ -1,5 +1,6 @@
 package com.piyush.companyservice.Entities;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -7,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class StockPrices {
@@ -18,17 +18,20 @@ public class StockPrices {
     
     private Integer companyCode;
 
-    private Integer stockCode;
+    private String stockCode;
 
     private Double currentPrice;
 
-    @Column(name = "at_time")
-    @DateTimeFormat(iso = ISO.DATE)
-    private Date date;
+    @Column(name = "Date_")
+    @DateTimeFormat(pattern = "dd/mm/YYYY")
+	private Date date;
+	
+	@Column(name ="time_")
+	@DateTimeFormat( pattern = "HH:mm:ss")
+	private Time time;
 
 	public StockPrices() {
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -38,13 +41,11 @@ public class StockPrices {
 		this.id = id;
 	}
 
-	
-
-	public Integer getStockCode() {
+	public String getStockCode() {
 		return stockCode;
 	}
 
-	public void setStockCode(Integer stockCode) {
+	public void setStockCode(String stockCode) {
 		this.stockCode = stockCode;
 	}
 
@@ -64,38 +65,38 @@ public class StockPrices {
 		this.date = date;
 	}
 
-
-
-	public StockPrices(Integer id, Integer companyCode, Integer stockCode, Double currentPrice, Date date) {
+	public StockPrices(Integer id, Integer companyCode, String stockCode, Double currentPrice, Date date, Time time) {
 		this.id = id;
 		this.companyCode = companyCode;
 		this.stockCode = stockCode;
 		this.currentPrice = currentPrice;
 		this.date = date;
+		this.time = time;
 	}
-
-
 
 	public Integer getCompanyCode() {
 		return companyCode;
 	}
 
-
-
 	public void setCompanyCode(Integer companyCode) {
 		this.companyCode = companyCode;
 	}
-
-
 
 	public Double getCurrentPrice() {
 		return currentPrice;
 	}
 
-
-
 	public void setCurrentPrice(Double currentPrice) {
 		this.currentPrice = currentPrice;
+	}
+
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
 	}
        
 }

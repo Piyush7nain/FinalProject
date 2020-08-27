@@ -1,14 +1,9 @@
 package com.piyush.companyservice.Entities;
 
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Company {
@@ -26,13 +21,8 @@ public class Company {
     @Column(name ="company_details")
     private String companyDetails;
 
-    @JsonIgnore
-    @Transient
-    private List<StockPrices> stockPrices;
-
-    @JsonIgnore
-    @Transient
-    private List<Ipo> ipos;
+    @Column(name = "sector_id")
+    private Integer sectorId;
 
 
     public String getCompanyName() {
@@ -62,23 +52,13 @@ public class Company {
     public Company() {
     }
 
-    public Company(Integer id, String companyName, double turnover, String companyDetails) {
+    public Company(Integer id, String companyName, double turnover, String companyDetails, Integer sectorId) {
+        this.sectorId = sectorId;
         this.id = id;
         this.companyName = companyName;
         this.turnover = turnover;
         this.companyDetails = companyDetails;
     }
-
-    public List<StockPrices> getStockPrices() {
-        return stockPrices;
-    }
-
-    public void addStockPrices(StockPrices stockPrices) {
-        this.stockPrices.add( stockPrices);
-    }
-
-    
-
 
     @Override
     public String toString() {
@@ -94,16 +74,12 @@ public class Company {
         this.id = id;
     }
 
-    public void setStockPrices(List<StockPrices> stockPrices) {
-        this.stockPrices = stockPrices;
+    public Integer getSectorId() {
+        return sectorId;
     }
 
-    public List<Ipo> getIpos() {
-        return ipos;
-    }
-
-    public void setIpos(List<Ipo> ipos) {
-        this.ipos = ipos;
+    public void setSectorId(Integer sectorId) {
+        this.sectorId = sectorId;
     }
 
     

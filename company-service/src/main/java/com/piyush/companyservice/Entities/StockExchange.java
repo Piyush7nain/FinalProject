@@ -9,7 +9,7 @@ public class StockExchange {
 
     @Id
     @Column(name = "Stock_Ex_Code")
-    private Integer code;
+    private String code;
 
     @Column(name = "Stock_Exchange")
     private String stockExName;
@@ -20,11 +20,11 @@ public class StockExchange {
     @Column(name = "Info")
     private String info;
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -55,7 +55,7 @@ public class StockExchange {
     public StockExchange() {
     }
 
-    public StockExchange(Integer code, String stockExName, String address, String info) {
+    public StockExchange(String code, String stockExName, String address, String info) {
         this.code = code;
         this.stockExName = stockExName;
         this.address = address;

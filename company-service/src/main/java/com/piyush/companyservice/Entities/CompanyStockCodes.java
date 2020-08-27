@@ -11,7 +11,7 @@ public class CompanyStockCodes {
     private Integer companyId;
 
     @Column(name = "stock_code")
-    private Integer stockCode;
+    private String stockCode;
     
     @Id
     @Column(name = "company_code")
@@ -25,11 +25,11 @@ public class CompanyStockCodes {
         this.companyId = companyId;
     }
 
-    public Integer getStockCode() {
+    public String getStockCode() {
         return stockCode;
     }
 
-    public void setStockCode(Integer stockCode) {
+    public void setStockCode(String stockCode) {
         this.stockCode = stockCode;
     }
 
@@ -44,7 +44,7 @@ public class CompanyStockCodes {
     public CompanyStockCodes() {
     }
 
-    public CompanyStockCodes(Integer companyId, Integer stockCode, Integer companyCode) {
+    public CompanyStockCodes(Integer companyId,String stockCode, Integer companyCode) {
         this.companyId = companyId;
         this.stockCode = stockCode;
         CompanyCode = companyCode;

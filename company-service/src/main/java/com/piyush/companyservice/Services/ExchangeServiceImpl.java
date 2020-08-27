@@ -46,7 +46,7 @@ public class ExchangeServiceImpl implements ExchangeService {
     }
 
     @Override
-    public StockExchange getExchangeById(Integer id) {
+    public StockExchange getExchangeById(String id) {
         Optional<StockExchange> ex = exchangeRepository.findById(id);
         return ex.get();
     }
@@ -61,20 +61,20 @@ public class ExchangeServiceImpl implements ExchangeService {
     }
 
     @Override
-    public List<Company> getAllCompanies(Integer id) {
+    public List<Company> getAllCompanies(String id) {
         List<Integer> companyIds = codesRepository.findCompanyIdByStockCode(id);
         List<Company> companies = companyRepository.findByIdIn(companyIds);
         return companies;
     }
 
     @Override
-    public List<StockPrices> getAllStocks(Integer id) {
+    public List<StockPrices> getAllStocks(String id) {
         return stocksRepository.findByStockCode(id);
     }
 
     @Override
-    public List<Ipo> getAllIpos(Integer id) {
-        return ipoRepository.findByStockCode(id);
+    public List<Ipo> getAllIpos(String id) {
+        return ipoRepository.findByStockCodeOrderByDate(id);
     }
     
 }

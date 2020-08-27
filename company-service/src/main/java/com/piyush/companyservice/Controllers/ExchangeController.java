@@ -37,7 +37,7 @@ public class ExchangeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StockExchange> getExchangeById(@PathVariable Integer id){
+    public ResponseEntity<StockExchange> getExchangeById(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.CREATED).body(exchangeService.getExchangeById(id));
     }
 
@@ -47,15 +47,15 @@ public class ExchangeController {
     }
 
     @GetMapping("/{id}/companies")
-    public ResponseEntity<List<Company>> getAllCompanies(@PathVariable Integer id){
+    public ResponseEntity<List<Company>> getAllCompanies(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.FOUND).body(exchangeService.getAllCompanies(id));
     }
     @GetMapping("/{id}/stocks")
-    public ResponseEntity<List<StockPrices>> getAllStockPrices(@PathVariable Integer id){
+    public ResponseEntity<List<StockPrices>> getAllStockPrices(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.FOUND).body(exchangeService.getAllStocks(id));
     }
     @GetMapping("/{id}/ipos")
-    public ResponseEntity<List<Ipo>> getAllIpos(@PathVariable Integer id){
+    public ResponseEntity<List<Ipo>> getAllIpos(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.FOUND).body(exchangeService.getAllIpos(id));
     }
 

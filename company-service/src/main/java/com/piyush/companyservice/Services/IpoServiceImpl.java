@@ -7,7 +7,7 @@ import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Repository.CodesRepository;
 import com.piyush.companyservice.Repository.CompanyRepository;
 import com.piyush.companyservice.Repository.IpoRepository;
-import com.piyush.models.Dates;
+import com.piyush.companyservice.models.Dates;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ public class IpoServiceImpl implements IpoService {
     }
 
     @Override
-    public List<Ipo> getIpoByCompanyStockEx(String name, Integer stockCode) {
+    public List<Ipo> getIpoByCompanyStockEx(String name, String stockCode) {
         Integer id = companyRepository.findByCompanyName(name).getid();
         Integer code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
         return ipoRepository.findByCompanyCodeOrderByDate(code);
@@ -52,7 +52,7 @@ public class IpoServiceImpl implements IpoService {
 
     @Override
     public List<Ipo> getAllIpo() {
-        return ipoRepository.findAll();
+        return ipoRepository.findAllByOrderByDate();
     }
 
     @Override

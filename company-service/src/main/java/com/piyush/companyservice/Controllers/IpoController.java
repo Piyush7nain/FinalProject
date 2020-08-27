@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Services.IpoService;
-import com.piyush.models.Dates;
+import com.piyush.companyservice.models.Dates;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +37,7 @@ public class IpoController {
         return ResponseEntity.status(HttpStatus.FOUND).body(ipoService.getAllIpoByCompany(name));
     }
     @GetMapping("/company/{name}/stockEx/{stockCode}")
-    public ResponseEntity<List<Ipo>> getAllIpo(@PathVariable(value = "name") String name, @PathVariable(value = "stockCode") Integer stockCode){
+    public ResponseEntity<List<Ipo>> getAllIpo(@PathVariable(value = "name") String name, @PathVariable(value = "stockCode")String stockCode){
         return ResponseEntity.status(HttpStatus.FOUND).body(ipoService.getIpoByCompanyStockEx(name, stockCode));
     }
 

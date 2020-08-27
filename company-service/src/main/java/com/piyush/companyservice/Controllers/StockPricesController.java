@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.piyush.companyservice.Entities.StockPrices;
 import com.piyush.companyservice.Services.StocksService;
-import com.piyush.models.Dates;
+import com.piyush.companyservice.models.Dates;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class StockPricesController {
     }
     
     @GetMapping("/company/{name}/stockEx/{stockCode}")
-    public ResponseEntity<List<StockPrices>> getAllStockPrices(@PathVariable(value = "name") String name, @PathVariable(value = "stockCode") Integer stockCode){
+    public ResponseEntity<List<StockPrices>> getAllStockPrices(@PathVariable(value = "name") String name, @PathVariable(value = "stockCode") String stockCode){
         return ResponseEntity.status(HttpStatus.FOUND).body(stocksService.getStockPriceByCompanyStockEx(name, stockCode));
     }
 

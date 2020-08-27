@@ -3,7 +3,7 @@ package com.piyush.companyservice.Services;
 import java.util.List;
 
 import com.piyush.companyservice.Entities.Ipo;
-import com.piyush.models.Dates;
+import com.piyush.companyservice.models.Dates;
 
 public interface IpoService {
 
@@ -11,7 +11,7 @@ public interface IpoService {
 
     List<Ipo> getAllIpoByCompany(String name);
 
-	List<Ipo> getIpoByCompanyStockEx(String name, Integer stockCode);
+	List<Ipo> getIpoByCompanyStockEx(String name, String stockCode);
 
 	List<Ipo> getIpoByRange(Dates dates, String name);
 

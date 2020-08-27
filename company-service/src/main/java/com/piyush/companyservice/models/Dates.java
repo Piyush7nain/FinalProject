@@ -1,4 +1,4 @@
-package com.piyush.models;
+package com.piyush.companyservice.models;
 
 import java.util.Date;
 

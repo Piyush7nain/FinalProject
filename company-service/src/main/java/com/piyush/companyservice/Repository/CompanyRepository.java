@@ -15,5 +15,7 @@ public interface CompanyRepository extends JpaRepository<Company, Integer>{
     Company findByCompanyName(String name);
     
     List<Company> findByIdIn(List<Integer> codes);
+
+	List<Company> findBySectorId(Integer id);
     
 }

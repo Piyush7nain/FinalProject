@@ -6,7 +6,7 @@ import com.piyush.companyservice.Entities.StockPrices;
 import com.piyush.companyservice.Repository.CodesRepository;
 import com.piyush.companyservice.Repository.CompanyRepository;
 import com.piyush.companyservice.Repository.StockPricesRepository;
-import com.piyush.models.Dates;
+import com.piyush.companyservice.models.Dates;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class StocksServiceImpl implements StocksService {
     }
 
     @Override
-    public List<StockPrices> getStockPriceByCompanyStockEx(String name, Integer stockCode) {
+    public List<StockPrices> getStockPriceByCompanyStockEx(String name, String stockCode) {
         Integer id = companyRepository.findByCompanyName(name).getid();
         Integer code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
         return stockPriceRepository.findByCompanyCodeOrderByDate(code);

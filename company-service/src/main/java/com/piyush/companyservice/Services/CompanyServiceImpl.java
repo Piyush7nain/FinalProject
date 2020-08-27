@@ -31,7 +31,4 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.save(company);
     }
     
-
-    
-    
 }

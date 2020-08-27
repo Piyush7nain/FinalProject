@@ -15,9 +15,9 @@ public interface CodesRepository extends JpaRepository<CompanyStockCodes, Intege
 	List<Integer> findByCompanyId(Integer id);
 
 	@Query(value = "SELECT company_id   FROM Company_Stock_Codes AS a WHERE a.Stock_Code = ?1", nativeQuery = true)
-	List<Integer> findCompanyIdByStockCode(Integer id);
+	List<Integer> findCompanyIdByStockCode(String id);
 
-	CompanyStockCodes findCompanyCodeByCompanyIdAndStockCode(Integer id, Integer stockCode); 
+	CompanyStockCodes findCompanyCodeByCompanyIdAndStockCode(Integer id, String stockCode); 
 
     
 }
