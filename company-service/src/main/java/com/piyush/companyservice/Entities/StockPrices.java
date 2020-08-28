@@ -1,18 +1,21 @@
 package com.piyush.companyservice.Entities;
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class StockPrices {
 
-    @Id
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     
@@ -23,12 +26,11 @@ public class StockPrices {
     private Double currentPrice;
 
     @Column(name = "Date_")
-    @DateTimeFormat(pattern = "dd/mm/YYYY")
+    @DateTimeFormat(iso = ISO.DATE)
 	private Date date;
 	
-	@Column(name ="time_")
-	@DateTimeFormat( pattern = "HH:mm:ss")
-	private Time time;
+	@Column(name = "time_")
+	private String time;
 
 	public StockPrices() {
 	}
@@ -65,8 +67,8 @@ public class StockPrices {
 		this.date = date;
 	}
 
-	public StockPrices(Integer id, Integer companyCode, String stockCode, Double currentPrice, Date date, Time time) {
-		this.id = id;
+	public StockPrices(Integer companyCode, String stockCode, Double currentPrice, Date date, String time) {
+		
 		this.companyCode = companyCode;
 		this.stockCode = stockCode;
 		this.currentPrice = currentPrice;
@@ -91,11 +93,11 @@ public class StockPrices {
 	}
 
 
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
        
