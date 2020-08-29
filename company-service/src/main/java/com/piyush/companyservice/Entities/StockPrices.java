@@ -17,9 +17,8 @@ public class StockPrices {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    
-    private Integer companyCode;
+ 
+    private String companyCode;
 
     private String stockCode;
 
@@ -51,13 +50,6 @@ public class StockPrices {
 		this.stockCode = stockCode;
 	}
 
-	public Double getPricePerShare() {
-		return currentPrice;
-	}
-
-	public void setPricePerShare(Double pricePerShare) {
-		this.currentPrice = pricePerShare;
-	}
 
 	public Date getDate() {
 		return date;
@@ -67,7 +59,7 @@ public class StockPrices {
 		this.date = date;
 	}
 
-	public StockPrices(Integer companyCode, String stockCode, Double currentPrice, Date date, String time) {
+	public StockPrices(String companyCode, String stockCode, Double currentPrice, Date date, String time) {
 		
 		this.companyCode = companyCode;
 		this.stockCode = stockCode;
@@ -76,11 +68,11 @@ public class StockPrices {
 		this.time = time;
 	}
 
-	public Integer getCompanyCode() {
+	public String getCompanyCode() {
 		return companyCode;
 	}
 
-	public void setCompanyCode(Integer companyCode) {
+	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
 

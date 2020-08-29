@@ -31,14 +31,14 @@ public class SectorServiceImpl implements SectorService {
     }
 
     @Override
-    public Sector getsector(Integer id) {
+    public Sector getsector(String id) {
         return sectorRepository.findById(id).get();
     }
 
     @Override
-    public List<Company> getAllCompanies(Integer id) {
+    public List<Company> getAllCompanies(String name) {
         
-        return companyRepository.findBySectorId(id);
+        return companyRepository.findBySectorName(name);
     }
     
 }

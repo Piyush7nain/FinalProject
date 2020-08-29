@@ -33,14 +33,14 @@ public class SectorController {
         return ResponseEntity.status(HttpStatus.FOUND).body(sectorService.getAllsectors());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Sector> getSector(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.FOUND).body(sectorService.getsector(id));
+    @GetMapping("/{name}")
+    public ResponseEntity<Sector> getSector(@PathVariable String name){
+        return ResponseEntity.status(HttpStatus.FOUND).body(sectorService.getsector(name));
     }
 
-    @GetMapping("/{id}/companies")
-    public ResponseEntity<List<Company>> getAllCompanies(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.FOUND).body(sectorService.getAllCompanies(id));
+    @GetMapping("/{name}/companies")
+    public ResponseEntity<List<Company>> getAllCompanies(@PathVariable String name){
+        return ResponseEntity.status(HttpStatus.FOUND).body(sectorService.getAllCompanies(name));
     }
     
 }

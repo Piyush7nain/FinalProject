@@ -10,7 +10,7 @@ public class Company {
 
     @Id
     @Column(name = "id")
-    private Integer id;
+    private String id;
     
     @Column(name ="company_name", nullable = false)
     private String companyName;
@@ -21,8 +21,8 @@ public class Company {
     @Column(name ="company_details")
     private String companyDetails;
 
-    @Column(name = "sector_id")
-    private Integer sectorId;
+    @Column(name = "sector_name")
+    private String sectorName;
 
 
     public String getCompanyName() {
@@ -52,8 +52,8 @@ public class Company {
     public Company() {
     }
 
-    public Company(Integer id, String companyName, double turnover, String companyDetails, Integer sectorId) {
-        this.sectorId = sectorId;
+    public Company(String id, String companyName, double turnover, String companyDetails, String sectorId) {
+        this.sectorName = sectorId;
         this.id = id;
         this.companyName = companyName;
         this.turnover = turnover;
@@ -66,20 +66,20 @@ public class Company {
                 + ", turnover=" + turnover + "]";
     }
 
-    public Integer getid() {
+    public String getid() {
         return id;
     }
 
-    public void setid(Integer id) {
+    public void setid(String id) {
         this.id = id;
     }
 
-    public Integer getSectorId() {
-        return sectorId;
+    public String getSectorName() {
+        return sectorName;
     }
 
-    public void setSectorId(Integer sectorId) {
-        this.sectorId = sectorId;
+    public void setSectorName(String sectorName) {
+        this.sectorName = sectorName;
     }
 
     

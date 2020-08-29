@@ -11,8 +11,8 @@ public interface SectorService {
 
 	List<Sector> getAllsectors();
 
-	Sector getsector(Integer id);
+	Sector getsector(String id);
 
-	List<Company> getAllCompanies(Integer id);
+	List<Company> getAllCompanies(String name);
 
 }

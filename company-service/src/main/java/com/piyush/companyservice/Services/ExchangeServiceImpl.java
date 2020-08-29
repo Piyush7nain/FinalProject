@@ -62,7 +62,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 
     @Override
     public List<Company> getAllCompanies(String id) {
-        List<Integer> companyIds = codesRepository.findCompanyIdByStockCode(id);
+        List<String> companyIds = codesRepository.findCompanyIdByStockCode(id);
         List<Company> companies = companyRepository.findByIdIn(companyIds);
         return companies;
     }

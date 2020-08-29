@@ -23,24 +23,24 @@ public class StocksServiceImpl implements StocksService {
 
     @Override
     public List<StockPrices> getAllStockPricesByName(String name) {
-        Integer id = companyRepository.findByCompanyName(name).getid();
-        List<Integer> codes = codesRepository.findByCompanyId(id);
+        String id = companyRepository.findByCompanyName(name).getid();
+        List<String> codes = codesRepository.findByCompanyId(id);
         List<StockPrices> stocks = stockPriceRepository.findByCompanyCodeInOrderByDate(codes);
         return stocks;
     }
 
     @Override
     public List<StockPrices> getStockPriceByCompanyStockEx(String name, String stockCode) {
-        Integer id = companyRepository.findByCompanyName(name).getid();
-        Integer code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
+        String id = companyRepository.findByCompanyName(name).getid();
+        String code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
         return stockPriceRepository.findByCompanyCodeOrderByDate(code);
     }
 
     @Override
     public List<StockPrices> getStockPricesByRange(Dates dates, String name) {
 
-        Integer id = companyRepository.findByCompanyName(name).getid();
-        List<Integer> codes = codesRepository.findByCompanyId(id);
+        String id = companyRepository.findByCompanyName(name).getid();
+        List<String> codes = codesRepository.findByCompanyId(id);
         return stockPriceRepository.findStockInRange(codes, dates.getStartDate(), dates.getEndDate());
     }
 

@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "config-server"
+		},
+		{
+			"path": "eureka-server"
+		},
+		{
+			"name": "admin-server",
+			"path": "admin-server"
+		},
+		{
+			"name": "company-service",
+			"path": "company-service"
+		},
+		{
+			"path": "user-service"
+		},
+		{
+			"name": "upload-service",
+			"path": "upload-service"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}

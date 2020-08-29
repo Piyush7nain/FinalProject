@@ -30,23 +30,23 @@ public class IpoServiceImpl implements IpoService {
 
     @Override
     public List<Ipo> getAllIpoByCompany(String name) {
-        Integer id = companyRepository.findByCompanyName(name).getid();
-        List<Integer> codes = codesRepository.findByCompanyId(id);
+        String id = companyRepository.findByCompanyName(name).getid();
+        List<String> codes = codesRepository.findByCompanyId(id);
         List<Ipo> ipos = ipoRepository.findByCompanyCodeInOrderByDate(codes);
         return ipos;
     }
 
     @Override
     public List<Ipo> getIpoByCompanyStockEx(String name, String stockCode) {
-        Integer id = companyRepository.findByCompanyName(name).getid();
-        Integer code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
+        String id = companyRepository.findByCompanyName(name).getid();
+        String code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
         return ipoRepository.findByCompanyCodeOrderByDate(code);
     }
 
     @Override
     public List<Ipo> getIpoByRange(Dates dates, String name) {
-        Integer id = companyRepository.findByCompanyName(name).getid();
-        List<Integer> codes = codesRepository.findByCompanyId(id);
+        String id = companyRepository.findByCompanyName(name).getid();
+        List<String> codes = codesRepository.findByCompanyId(id);
         return ipoRepository.findStockInRange(codes, dates.getStartDate(), dates.getEndDate());
     }
 

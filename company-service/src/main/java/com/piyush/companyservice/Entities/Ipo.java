@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,9 +16,10 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 public class Ipo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Integer companyCode;
+    private String companyCode;
 
     private String stockCode;
 
@@ -33,7 +36,7 @@ public class Ipo {
     public Ipo() {
     }
 
-    public Ipo(Integer id, Integer companyCode, String stockCode, Double pricePerShare, Date date, String remarks) {
+    public Ipo(Integer id, String companyCode, String stockCode, Double pricePerShare, Date date, String remarks) {
         this.id = id;
         this.companyCode = companyCode;
         this.stockCode = stockCode;
@@ -50,11 +53,11 @@ public class Ipo {
         this.id = id;
     }
 
-    public Integer getCompanyCode() {
+    public String getCompanyCode() {
         return companyCode;
     }
 
-    public void setCompanyCode(Integer companyCode) {
+    public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
     }
 

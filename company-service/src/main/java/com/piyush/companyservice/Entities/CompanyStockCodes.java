@@ -8,20 +8,20 @@ import javax.persistence.Id;
 public class CompanyStockCodes {
 
     @Column(name = "company_id")
-    private Integer companyId;
+    private String companyId;
 
     @Column(name = "stock_code")
     private String stockCode;
     
     @Id
     @Column(name = "company_code")
-    private Integer CompanyCode;
+    private String CompanyCode;
 
-    public Integer getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 
@@ -33,18 +33,18 @@ public class CompanyStockCodes {
         this.stockCode = stockCode;
     }
 
-    public Integer getCompanyCode() {
+    public String getCompanyCode() {
         return CompanyCode;
     }
 
-    public void setCompanyCode(Integer companyCode) {
+    public void setCompanyCode(String companyCode) {
         CompanyCode = companyCode;
     }
 
     public CompanyStockCodes() {
     }
 
-    public CompanyStockCodes(Integer companyId,String stockCode, Integer companyCode) {
+    public CompanyStockCodes(String companyId,String stockCode, String companyCode) {
         this.companyId = companyId;
         this.stockCode = stockCode;
         CompanyCode = companyCode;
