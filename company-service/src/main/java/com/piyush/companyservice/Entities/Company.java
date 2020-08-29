@@ -9,9 +9,6 @@ import javax.persistence.Id;
 public class Company {
 
     @Id
-    @Column(name = "id")
-    private String id;
-    
     @Column(name ="company_name", nullable = false)
     private String companyName;
 
@@ -52,9 +49,8 @@ public class Company {
     public Company() {
     }
 
-    public Company(String id, String companyName, double turnover, String companyDetails, String sectorId) {
+    public Company( String companyName, double turnover, String companyDetails, String sectorId) {
         this.sectorName = sectorId;
-        this.id = id;
         this.companyName = companyName;
         this.turnover = turnover;
         this.companyDetails = companyDetails;
@@ -62,16 +58,8 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company [id=" + id + ", companyDetails=" + companyDetails + ", companyName=" + companyName
+        return "Company [ "+ " companyDetails=" + companyDetails + ", companyName=" + companyName
                 + ", turnover=" + turnover + "]";
-    }
-
-    public String getid() {
-        return id;
-    }
-
-    public void setid(String id) {
-        this.id = id;
     }
 
     public String getSectorName() {

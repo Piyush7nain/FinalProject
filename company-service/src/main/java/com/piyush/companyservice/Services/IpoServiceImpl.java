@@ -3,7 +3,10 @@ package com.piyush.companyservice.Services;
 import java.util.List;
 import java.util.Optional;
 
+import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.Ipo;
+import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
+import com.piyush.companyservice.Exceptions.RegistrationError;
 import com.piyush.companyservice.Repository.CodesRepository;
 import com.piyush.companyservice.Repository.CompanyRepository;
 import com.piyush.companyservice.Repository.IpoRepository;
@@ -29,25 +32,32 @@ public class IpoServiceImpl implements IpoService {
     }
 
     @Override
-    public List<Ipo> getAllIpoByCompany(String name) {
-        String id = companyRepository.findByCompanyName(name).getid();
-        List<String> codes = codesRepository.findByCompanyId(id);
+    public List<Ipo> getAllIpoByCompany(String name) throws CompanyNotFoundException, RegistrationError {
+        Company company = companyRepository.findByCompanyName(name);
+        if(company == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
+        List<String> codes = codesRepository.findByCompanyName(company.getCompanyName());
+        if(codes == null){throw new RegistrationError("Company might not be registered with any StockExchages");}
         List<Ipo> ipos = ipoRepository.findByCompanyCodeInOrderByDate(codes);
         return ipos;
     }
 
     @Override
-    public List<Ipo> getIpoByCompanyStockEx(String name, String stockCode) {
-        String id = companyRepository.findByCompanyName(name).getid();
-        String code = codesRepository.findCompanyCodeByCompanyIdAndStockCode(id, stockCode).getCompanyCode();
+    public List<Ipo> getIpoByCompanyStockEx(String name, String stockCode) throws CompanyNotFoundException,
+            RegistrationError {
+        Company company = companyRepository.findByCompanyName(name);
+        if(company == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
+        String code = codesRepository.findCompanyCodeByCompanyNameAndStockCode(company.getCompanyName(), stockCode).getCompanyCode();
+        if(code == null){throw new RegistrationError("Either "+ stockCode +" is not registered or "+name+" is not registered with "+stockCode);}
         return ipoRepository.findByCompanyCodeOrderByDate(code);
     }
 
     @Override
-    public List<Ipo> getIpoByRange(Dates dates, String name) {
-        String id = companyRepository.findByCompanyName(name).getid();
-        List<String> codes = codesRepository.findByCompanyId(id);
-        return ipoRepository.findStockInRange(codes, dates.getStartDate(), dates.getEndDate());
+    public List<Ipo> getIpoByRange(Dates dates, String name) throws CompanyNotFoundException, RegistrationError {
+        Company company = companyRepository.findByCompanyName(name);
+        if(company == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
+        List<String> codes = codesRepository.findByCompanyName(company.getCompanyName());
+        if(codes == null){throw new RegistrationError("Company might not be registered with any StockExchages");}
+        return ipoRepository.findIpoInRange(codes, dates.getStartDate(), dates.getEndDate());
     }
 
     @Override

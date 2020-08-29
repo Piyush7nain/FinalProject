@@ -7,8 +7,8 @@ import javax.persistence.Id;
 @Entity
 public class CompanyStockCodes {
 
-    @Column(name = "company_id")
-    private String companyId;
+    @Column(name = "company_name")
+    private String companyName;
 
     @Column(name = "stock_code")
     private String stockCode;
@@ -17,12 +17,12 @@ public class CompanyStockCodes {
     @Column(name = "company_code")
     private String CompanyCode;
 
-    public String getCompanyId() {
-        return companyId;
+    public String getcompanyName() {
+        return companyName;
     }
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
+    public void setcompanyName(String companyId) {
+        this.companyName = companyId;
     }
 
     public String getStockCode() {
@@ -44,8 +44,8 @@ public class CompanyStockCodes {
     public CompanyStockCodes() {
     }
 
-    public CompanyStockCodes(String companyId,String stockCode, String companyCode) {
-        this.companyId = companyId;
+    public CompanyStockCodes(String companyName,String stockCode, String companyCode) {
+        this.companyName= companyName;
         this.stockCode = stockCode;
         CompanyCode = companyCode;
     }

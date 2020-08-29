@@ -10,6 +10,8 @@ public interface CompanyService {
 
 	List<Company> getCompanyByLikeName(String name);
 
-	Company addCompany(Company company);
+	String addCompany(Company company);
+
+	String updateCompany(Company company);
     
 }

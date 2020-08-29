@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.Sector;
+import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
 
 public interface SectorService {
 
@@ -13,6 +14,6 @@ public interface SectorService {
 
 	Sector getsector(String id);
 
-	List<Company> getAllCompanies(String name);
+	List<Company> getAllCompanies(String name) throws CompanyNotFoundException;
 
 }

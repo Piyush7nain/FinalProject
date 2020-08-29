@@ -18,7 +18,7 @@ public interface IpoRepository extends JpaRepository<Ipo, Integer> {
     List<Ipo> findByCompanyCodeOrderByDate(String code);
 
     @Query(value = "SELECT * FROM ipo as a WHERE a.company_code IN ?1 AND a.open_date BETWEEN ?2 AND ?3 ORDER BY a.open_date", nativeQuery = true)
-	List<Ipo> findStockInRange(List<String> codes, Date startDate, Date endDate);
+	List<Ipo> findIpoInRange(List<String> companyCodes, Date startDate, Date endDate);
 
     List<Ipo> findByStockCodeOrderByDate(String id);
     

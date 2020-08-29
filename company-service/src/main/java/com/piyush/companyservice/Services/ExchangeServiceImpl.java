@@ -36,8 +36,20 @@ public class ExchangeServiceImpl implements ExchangeService {
     private IpoRepository ipoRepository;
 
     @Override
-    public StockExchange addExchange(StockExchange ex) {
-        return exchangeRepository.save(ex);
+    public String addExchange(StockExchange ex) {
+        StockExchange data = exchangeRepository.findById(ex.getCode()).get();
+        if(data == null){ 
+            exchangeRepository.save(ex);
+            return "Added " + ex.getStockExName() + " to the DataBase";
+        }else{
+            data.setAddress(ex.getAddress());
+            data.setCode(ex.getCode());
+            data.setInfo(ex.getInfo());
+            data.setStockExName(ex.getStockExName());
+            exchangeRepository.save(data);
+            return "Updated " + ex.getStockExName();
+        }        
+        
     }
 
     @Override
@@ -55,15 +67,15 @@ public class ExchangeServiceImpl implements ExchangeService {
     public String addCompanyToExchange(CompanyStockCodes csc) {
         codesRepository.save(csc);
         String s = "";
-        s.concat(companyRepository.findById(csc.getCompanyId()).get().getCompanyName()
+        s.concat(companyRepository.findById(csc.getCompanyCode()).get().getCompanyName()
                 + exchangeRepository.findById(csc.getStockCode()).get().getStockExName());
         return s;
     }
 
     @Override
     public List<Company> getAllCompanies(String id) {
-        List<String> companyIds = codesRepository.findCompanyIdByStockCode(id);
-        List<Company> companies = companyRepository.findByIdIn(companyIds);
+        List<String> companyIds = codesRepository.findCompanyNameByStockCode(id);
+        List<Company> companies = companyRepository.findByCompanyNameIn(companyIds);
         return companies;
     }
 

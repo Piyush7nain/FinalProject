@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CodesRepository extends JpaRepository<CompanyStockCodes, Integer>{
 
-    @Query(value = "SELECT company_code FROM Company_Stock_Codes AS a WHERE a.company_id = ?1 ", nativeQuery = true)
-	List<String> findByCompanyId(String id);
+    @Query(value = "SELECT company_code FROM Company_Stock_Codes AS a WHERE a.company_name = ?1 ", nativeQuery = true)
+	List<String> findByCompanyName(String name);
 
-	@Query(value = "SELECT company_id   FROM Company_Stock_Codes AS a WHERE a.Stock_Code = ?1", nativeQuery = true)
-	List<String> findCompanyIdByStockCode(String id);
+	@Query(value = "SELECT company_name   FROM Company_Stock_Codes AS a WHERE a.Stock_Code = ?1", nativeQuery = true)
+	List<String> findCompanyNameByStockCode(String name);
 
-	CompanyStockCodes findCompanyCodeByCompanyIdAndStockCode(String id, String stockCode); 
+	CompanyStockCodes findCompanyCodeByCompanyNameAndStockCode(String name, String stockCode); 
 
     
 }

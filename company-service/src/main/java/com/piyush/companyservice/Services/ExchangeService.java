@@ -10,7 +10,7 @@ import com.piyush.companyservice.Entities.StockPrices;
 
 public interface ExchangeService {
 
-	StockExchange addExchange(StockExchange ex);
+	String addExchange(StockExchange ex);
 
 	List<StockExchange> getExchange();
 

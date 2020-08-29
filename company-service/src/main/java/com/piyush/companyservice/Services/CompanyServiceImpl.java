@@ -15,7 +15,7 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    public List<Company> getAllCompany() {
+    public List<Company> getAllCompany()  {
         return companyRepository.findAll();
     }
 
@@ -26,8 +26,31 @@ public class CompanyServiceImpl implements CompanyService {
 
     //Add services
     @Override
-    public Company addCompany(Company company) {
-        return companyRepository.save(company);
+    public String addCompany(Company company) {
+        if(companyRepository.findByCompanyName(company.getCompanyName()) == null){
+            companyRepository.save(company);
+            return "Added company " + company.getCompanyName() + " to DataBase";
+        }
+        else{
+            return "Company already exist, use update request to update data";
+        }
+    }
+
+    @Override
+    public String updateCompany(Company company) {
+        Company data = companyRepository.findByCompanyName(company.getCompanyName());
+        if(data ==null){
+            companyRepository.save(company);
+            return "No existing record of the company found, added new company" + company.getCompanyName()+ " to DataBase";
+        }else{
+            data.setCompanyDetails(company.getCompanyDetails());
+            data.setSectorName(company.getSectorName());
+            data.setCompanyName(company.getCompanyName());
+            data.setTurnover(company.getTurnover());      
+            companyRepository.save(data);
+            return "Udpated company "+ data.getCompanyName();
+        }
+        
     }
     
 }

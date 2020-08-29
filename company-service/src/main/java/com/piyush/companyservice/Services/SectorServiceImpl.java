@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.Sector;
+import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
 import com.piyush.companyservice.Repository.CompanyRepository;
 import com.piyush.companyservice.Repository.SectorRepository;
 
@@ -36,9 +37,11 @@ public class SectorServiceImpl implements SectorService {
     }
 
     @Override
-    public List<Company> getAllCompanies(String name) {
+    public List<Company> getAllCompanies(String name) throws CompanyNotFoundException {
         
-        return companyRepository.findBySectorName(name);
+        List<Company> findBySectorName = companyRepository.findBySectorName(name);
+        if(findBySectorName == null){throw new CompanyNotFoundException("No companies found in the given sector") ;}
+        return findBySectorName;
     }
     
 }

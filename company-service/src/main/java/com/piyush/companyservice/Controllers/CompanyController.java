@@ -3,6 +3,7 @@ package com.piyush.companyservice.Controllers;
 import java.util.List;
 
 import com.piyush.companyservice.Entities.Company;
+import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
 import com.piyush.companyservice.Services.CompanyService;
 
 import org.springframework.http.HttpStatus;
@@ -20,31 +21,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyController {
 
     CompanyService companyService;
-
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
     }
     
-   /*  @GetMapping("/{id}")
-    public ResponseEntity<Company> getCompanyById(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.FOUND).body(companyService.getCompanyById(id));
-    } */
 
     @GetMapping("/company/all")
-    public ResponseEntity<List<Company>> getAllCompany(){
-        return ResponseEntity.status(HttpStatus.FOUND).body(companyService.getAllCompany());
+    public ResponseEntity<List<Company>> getAllCompany() throws CompanyNotFoundException{
+        List<Company> allCompany = companyService.getAllCompany();
+        if(allCompany ==null){throw new CompanyNotFoundException("No Company added to DataBase") ;} 
+        return ResponseEntity.status(HttpStatus.FOUND).body(allCompany);
     }
     
     @GetMapping("/company/{name}")
-    public ResponseEntity<List<Company>> getCompanyByName(@PathVariable String name){
-        return ResponseEntity.status(HttpStatus.FOUND).body(companyService.getCompanyByLikeName(name));
+    public ResponseEntity<List<Company>> getCompanyByName(@PathVariable String name) throws CompanyNotFoundException{
+        List<Company> companyByLikeName = companyService.getCompanyByLikeName(name);
+        if(companyByLikeName ==null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
+        return ResponseEntity.status(HttpStatus.FOUND).body(companyByLikeName);
     }
     
 
     //add methods
     @PostMapping("/company/addCompany")
-    public ResponseEntity<Company> addCompany(@RequestBody Company company){
+    public ResponseEntity<String> addCompany(@RequestBody Company company){
         return ResponseEntity.status(HttpStatus.CREATED).body(companyService.addCompany(company));
+    }
+    @PostMapping("/company/updateCompany")
+    public ResponseEntity<String> updateCompany(@RequestBody Company company){
+        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.updateCompany(company));
     }
 
 }
