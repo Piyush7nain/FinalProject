@@ -20,6 +20,10 @@
 		{
 			"name": "upload-service",
 			"path": "upload-service"
+		},
+		{
+			"name": "zuul-gateway",
+			"path": "zuul-gateway"
 		}
 	],
 	"settings": {
