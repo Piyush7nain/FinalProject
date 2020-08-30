@@ -21,9 +21,11 @@ public class UserRequestModel {
 	private String lastName;
 	private String password;
 	private String email;
+	private String role;
 
-	public UserRequestModel(String userId, String password, String firstName, String lastName, String email) {
+	public UserRequestModel(String userId, String password, String firstName, String lastName, String email, String role) {
 		super();
+		this.role = role;
 		this.userId = userId;
 		this.password = password;
 		this.firstName = firstName;
@@ -79,6 +81,14 @@ public class UserRequestModel {
 	public String toString() {
 		return "UserRequestModel [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", password=" + password + ", email=" + email + "]";
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

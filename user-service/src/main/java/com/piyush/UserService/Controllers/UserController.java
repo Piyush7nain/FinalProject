@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.piyush.UserService.exceptions.UserNotFoundException;
 import com.piyush.UserService.services.UserService;
+import com.piyush.UserService.shared.Header;
+import com.piyush.UserService.shared.UserAuthenticate;
 import com.piyush.UserService.shared.UserRequestModel;
 import com.piyush.UserService.shared.UserResponseModel;
 
@@ -49,4 +51,9 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body( user);
 	}
 
+	@PostMapping("/users/login")
+	public ResponseEntity<Header> authenticateUser(@RequestBody UserAuthenticate user){
+
+		return ResponseEntity.status(HttpStatus.FOUND).body(userService.authenticateUser(user));
+	}
 }

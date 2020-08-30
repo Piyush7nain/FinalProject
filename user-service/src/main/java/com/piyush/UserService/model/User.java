@@ -35,9 +35,12 @@ public class User {
 	@Column(name ="email")
 	private String email;
 
-	public User(Integer id, String userId, String firstName, String lastName, String password, String email) {
+	@Column(name = "role")
+	private String role;
+
+	public User( String userId, String firstName, String lastName, String password, String email, String role) {
 		super();
-		this.id = id;
+		this.role = role;
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -101,6 +104,14 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", password=" + password + ", email=" + email + "]";
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

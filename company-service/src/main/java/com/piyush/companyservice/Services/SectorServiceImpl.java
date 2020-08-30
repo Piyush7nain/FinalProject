@@ -39,7 +39,7 @@ public class SectorServiceImpl implements SectorService {
     @Override
     public List<Company> getAllCompanies(String name) throws CompanyNotFoundException {
         
-        List<Company> findBySectorName = companyRepository.findBySectorName(name);
+        List<Company> findBySectorName = companyRepository.findBySectorNameIgnoreCase(name);
         if(findBySectorName == null){throw new CompanyNotFoundException("No companies found in the given sector") ;}
         return findBySectorName;
     }

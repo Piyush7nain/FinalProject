@@ -59,7 +59,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 
     @Override
     public StockExchange getExchangeById(String id) {
-        Optional<StockExchange> ex = exchangeRepository.findById(id);
+        Optional<StockExchange> ex = exchangeRepository.findByCodeIgnoreCase(id);
         return ex.get();
     }
 
@@ -75,18 +75,18 @@ public class ExchangeServiceImpl implements ExchangeService {
     @Override
     public List<Company> getAllCompanies(String id) {
         List<String> companyIds = codesRepository.findCompanyNameByStockCode(id);
-        List<Company> companies = companyRepository.findByCompanyNameIn(companyIds);
+        List<Company> companies = companyRepository.findByCompanyNameIgnoreCaseIn(companyIds);
         return companies;
     }
 
     @Override
     public List<StockPrices> getAllStocks(String id) {
-        return stocksRepository.findByStockCode(id);
+        return stocksRepository.findByStockCodeIgnoreCase(id);
     }
 
     @Override
     public List<Ipo> getAllIpos(String id) {
-        return ipoRepository.findByStockCodeOrderByDate(id);
+        return ipoRepository.findByStockCodeIgnoreCaseOrderByDate(id);
     }
     
 }

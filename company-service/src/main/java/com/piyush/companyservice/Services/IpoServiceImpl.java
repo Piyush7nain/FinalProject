@@ -33,29 +33,29 @@ public class IpoServiceImpl implements IpoService {
 
     @Override
     public List<Ipo> getAllIpoByCompany(String name) throws CompanyNotFoundException, RegistrationError {
-        Company company = companyRepository.findByCompanyName(name);
+        Company company = companyRepository.findByCompanyNameIgnoreCase(name);
         if(company == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
-        List<String> codes = codesRepository.findByCompanyName(company.getCompanyName());
+        List<String> codes = codesRepository.findByCompanyNameIgnoreCase(company.getCompanyName());
         if(codes == null){throw new RegistrationError("Company might not be registered with any StockExchages");}
-        List<Ipo> ipos = ipoRepository.findByCompanyCodeInOrderByDate(codes);
+        List<Ipo> ipos = ipoRepository.findByCompanyCodeIgnoreCaseInOrderByDate(codes);
         return ipos;
     }
 
     @Override
     public List<Ipo> getIpoByCompanyStockEx(String name, String stockCode) throws CompanyNotFoundException,
             RegistrationError {
-        Company company = companyRepository.findByCompanyName(name);
+        Company company = companyRepository.findByCompanyNameIgnoreCase(name);
         if(company == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
-        String code = codesRepository.findCompanyCodeByCompanyNameAndStockCode(company.getCompanyName(), stockCode).getCompanyCode();
+        String code = codesRepository.findCompanyCodeByCompanyNameIgnoreCaseAndStockCodeIgnoreCase(company.getCompanyName(), stockCode).getCompanyCode();
         if(code == null){throw new RegistrationError("Either "+ stockCode +" is not registered or "+name+" is not registered with "+stockCode);}
         return ipoRepository.findByCompanyCodeOrderByDate(code);
     }
 
     @Override
     public List<Ipo> getIpoByRange(Dates dates, String name) throws CompanyNotFoundException, RegistrationError {
-        Company company = companyRepository.findByCompanyName(name);
+        Company company = companyRepository.findByCompanyNameIgnoreCase(name);
         if(company == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
-        List<String> codes = codesRepository.findByCompanyName(company.getCompanyName());
+        List<String> codes = codesRepository.findByCompanyNameIgnoreCase(company.getCompanyName());
         if(codes == null){throw new RegistrationError("Company might not be registered with any StockExchages");}
         return ipoRepository.findIpoInRange(codes, dates.getStartDate(), dates.getEndDate());
     }
