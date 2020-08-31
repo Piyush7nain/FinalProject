@@ -1,0 +1,99 @@
+<div class="card card-body mb-3">
+
+  <!-- by #userForm we create a variable of type ngForm and assign it to the form we have created, we can assign similar variables to other divs as well  -->
+  <!-- ngForm lets us track the real time status of the form -->
+  <!-- Variables defined by us help us in referencing them within the template -->
+  <form #userForm = "ngForm" >
+
+      <!-- To use ngModule we need to import forms module in out app.module.ts and also add it to the imports section in the same file -->
+      <div class="form-group">
+        <label>First Name</label>
+        <input
+          type="text"
+          name ="firstName"
+          class="form-control is-invalid"
+          [(ngModel)] = "newUser.firstName"
+          #userFirstName ="ngModel"
+          [ngClass] = "{'is-invalid': userFirstName.errors && userFirstName.touched}"
+          required
+          minlength = "2" >
+        <div class="invalid-feedback"
+          [hidden] = "!userFirstName.errors?.required">
+          First Name Required
+        </div>
+        <div class="invalid-feedback"
+          [hidden] = "!userFirstName.errors?.minlength">
+          Must be atleast 2 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Last Name</label>
+        <input
+        type="text" name="lastName" class = "form-control"
+        [(ngModel)] = "newUser.lastName"
+        #userLastName ="ngModel"
+
+        [ngClass] = "{'is-invalid': userLastName.errors && userLastName.touched}"
+        required minlength = "2">
+        <div class="invalid-feedback"
+          [hidden] = "!userLastName.errors?.required">
+          Last Name Required
+        </div>
+        <div class="invalid-feedback"
+          [hidden] = "!userLastName.errors?.minlength">
+          Must be atleast 2 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+        type="text" name="Email" class = "form-control"
+        [(ngModel)] = "newUser.email"
+        #userEmail ="ngModel"
+        [ngClass] = "{'is-invalid': userEmail.errors && userEmail.touched}"
+        required
+        pattern = "">
+
+        <div class="invalid-feedback"
+          [hidden] = "!userEmail.errors?.required">
+          Email Required
+        </div>
+
+        <div class="invalid-feedback"
+          [hidden] = "!userEmail.errors?.pattern">
+          Email is not valid
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="text"
+          name ="password"
+          class="form-control is-invalid"
+          [(ngModel)] = "newUser.password"
+          #userpassword ="ngModel"
+          [ngClass] = "{'is-invalid': userpassword.errors && userpassword.touched}"
+          required
+          minlength = "4" >
+        <div class="invalid-feedback"
+          [hidden] = "!userpassword.errors?.required">
+          Password Required
+        </div>
+        <div class="invalid-feedback"
+          [hidden] = "!userpassword.errors?.minlength">
+          Must be atleast 4 characters
+        </div>
+      </div>
+
+
+
+    <!-- We do need argument for addUser any more since we have bound newUser to the form itself -->
+      <button type ='submit'[disabled]= " userForm.form.invalid "
+        class="btn btn-block btn-light mb-3" (click)= "onSignup()">Sign Up</button>
+
+  </form>
+</div>

@@ -1,0 +1,19 @@
+<Div class="text-center"><h1>Welcome</h1></Div>
+
+<div class="container text-center" style="border: 2px black solid;">
+  <div *ngIf = "showError"> No record found, You can try Signing-up </div>
+  <form>
+    <div class="mt-4 mb-2">
+      <label>Enter Username</label><br>
+      <input type="text" name="userId" placeholder="Username" [(ngModel)] = "username">
+    </div>
+    <div class="mt-2 mb-4">
+      <label>Enter Password</label><br>
+      <input type="password" name="password" placeholder="Password" [(ngModel)] ="password">
+    </div >
+    <div class="mb-4">
+      <button type="submit" class="mr-1 " (click) ="onLogin()"> Login</button>
+      <button type="submit" class="mr-1 " (click) ="onSignup()"> Sign up</button>
+    </div>
+  </form>
+</div>

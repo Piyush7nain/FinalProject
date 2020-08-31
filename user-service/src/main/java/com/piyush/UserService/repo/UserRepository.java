@@ -8,7 +8,7 @@ import com.piyush.UserService.model.User;
 
 @Repository 
 public interface UserRepository extends JpaRepository<User,Integer> {
-	public User findUserByUserId(String userId);
+	public User findUserByUserIdIgnoreCase(String userId);
 
-	public User findByUserIdAndPassword(String userId, String password);
+	public User findByUserIdIgnoreCaseAndPassword(String userId, String password);
 }

@@ -9,11 +9,10 @@ import com.piyush.UserService.shared.UserResponseModel;
 
 public interface UserService {
 
-	public UserResponseModel createNewUser(UserRequestModel userRequestModel);
+	public void createNewUser(UserRequestModel userRequestModel);
 
 	public Object getAllUsers();
 
-	public UserResponseModel getUserById(int id);
 
 	public UserResponseModel getUserByUserId(String id) throws UserNotFoundException;
 

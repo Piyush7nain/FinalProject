@@ -1,7 +1,6 @@
 package com.piyush.UserService.services;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -36,19 +35,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public UserResponseModel createNewUser(UserRequestModel userRequestModel) {
+	public void createNewUser(UserRequestModel userRequestModel) {
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		userRequestModel.setUserId(UUID.randomUUID().toString().split("-")[0]);
 		logger.info("userRequestModel -> {} ", userRequestModel);
-
-		User user = userRepository.save(mapper.map(userRequestModel, User.class));
-
-		logger.info("user -> {} ", user);
-
-		UserResponseModel userResponseModel = mapper.map(user, UserResponseModel.class);
-		logger.info("userResponseModel -> {} ", userResponseModel);
-		return userResponseModel;
-
+		userRequestModel.setRole("user");
+		userRepository.save(mapper.map(userRequestModel, User.class));
 	}
 
 	@Override
@@ -61,22 +52,14 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-	@Override
-	@Transactional
-	public UserResponseModel getUserById(int id) {
-		ModelMapper mapper = new ModelMapper();
-		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		User user = userRepository.findById(id).get();
-		logger.info("User of  id {} is {}", id, user);
-		return mapper.map(user, UserResponseModel.class);
-	}
+	
 
 	@Override
 	@Transactional
 	public UserResponseModel getUserByUserId(String id) throws UserNotFoundException {
 		ModelMapper mapper = new ModelMapper();
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		User user = userRepository.findUserByUserId(id);
+		User user = userRepository.findUserByUserIdIgnoreCase(id);
 		logger.info("User of  id {} is {}", id, user);
 
 		if (user == null) {
@@ -90,14 +73,15 @@ public class UserServiceImpl implements UserService {
 	public Header authenticateUser(UserAuthenticate userRequest)  {
 		
 		Header header = new Header();	
-		User user = userRepository.findByUserIdAndPassword(userRequest.getUserId(), userRequest.getPassword());	
+		User user = userRepository.findByUserIdIgnoreCaseAndPassword(userRequest.getUserId(), userRequest.getPassword());	
 		if(user == null){
-			header.setStatus("Login Failed");
+			header.setStatus("login-failed");
 			return header;
 		}else{
 			header.setUserId(user.getUserId());
 			header.setRole(user.getRole());
-			header.setStatus("Successful");
+			header.setStatus("successful");
+			header.setToken("");
 			return header;			
 		}	
 	}

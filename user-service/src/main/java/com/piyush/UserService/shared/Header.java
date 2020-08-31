@@ -7,6 +7,7 @@ public class Header {
     private String status;
 
     private String role;
+    private String token;
 
     public Header(String userId, String status, String role) {
         UserId = userId;
@@ -39,6 +40,14 @@ public class Header {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     

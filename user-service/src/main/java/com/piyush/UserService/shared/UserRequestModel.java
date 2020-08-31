@@ -1,6 +1,7 @@
 package com.piyush.UserService.shared;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserRequestModel {
 
-	@JsonIgnore
+	
 	private String userId;
 	
 	private String firstName;
@@ -21,6 +22,7 @@ public class UserRequestModel {
 	private String lastName;
 	private String password;
 	private String email;
+	@JsonIgnore
 	private String role;
 
 	public UserRequestModel(String userId, String password, String firstName, String lastName, String email, String role) {
