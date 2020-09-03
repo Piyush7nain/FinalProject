@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/ipo")
+@RequestMapping("/ipo")
 public class IpoController {
 
     @Autowired
@@ -29,10 +29,10 @@ public class IpoController {
     @GetMapping("/all")
     public ResponseEntity<List<Ipo>> getAllIpo() throws IpoNotFoundException {
         List<Ipo> allIpo = ipoService.getAllIpo();
-        if (allIpo == null) {
+        if (allIpo.size() == 0) {
             throw new IpoNotFoundException("No Ipos listed anywhere");
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(allIpo);
+        return ResponseEntity.status(HttpStatus.OK).body(allIpo);
     }
 
     @GetMapping("/{id}")
@@ -41,35 +41,45 @@ public class IpoController {
         if (ipo == null) {
             throw new IpoNotFoundException("No Ipo found with Id " + id);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(ipo);
+        return ResponseEntity.status(HttpStatus.OK).body(ipo);
     }
 
     @GetMapping("/company/{name}/all")
     public ResponseEntity<List<Ipo>> getIpoByName(@PathVariable String name)
             throws IpoNotFoundException, CompanyNotFoundException, RegistrationError {
         List<Ipo> allIpoByCompany = ipoService.getAllIpoByCompany(name);
-        if (allIpoByCompany == null) {
+        if (allIpoByCompany.size() == 0) {
             throw new IpoNotFoundException("No Ipo found for Company " + name);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(allIpoByCompany);
+        return ResponseEntity.status(HttpStatus.OK).body(allIpoByCompany);
     }
 
+    
     @GetMapping("/company/{name}/stockEx/{stockCode}")
     public ResponseEntity<List<Ipo>> getAllIpo(@PathVariable(value = "name") String name,
             @PathVariable(value = "stockCode") String stockCode) throws CompanyNotFoundException, IpoNotFoundException,
             RegistrationError {
         
                 List<Ipo> ipoByCompanyStockEx = ipoService.getIpoByCompanyStockEx(name, stockCode);
-                if(ipoByCompanyStockEx == null){throw new IpoNotFoundException("No Ipos found for the company " + name);}
-                return ResponseEntity.status(HttpStatus.FOUND).body(ipoByCompanyStockEx);
+                if(ipoByCompanyStockEx.size() == 0){throw new IpoNotFoundException("No Ipos found for the company " + name);}
+                return ResponseEntity.status(HttpStatus.OK).body(ipoByCompanyStockEx);
     }
 
     @PostMapping("/company/{name}/range")
     public ResponseEntity<List<Ipo>> getIpoByRange(@RequestBody Dates dates, @PathVariable String name) throws CompanyNotFoundException,IpoNotFoundException,
             RegistrationError {
         List<Ipo> ipoByRange = ipoService.getIpoByRange(dates, name);
-        if(ipoByRange == null){ throw new IpoNotFoundException("No Ipo found for the company "+name + " in the given range.");}
-        return ResponseEntity.status(HttpStatus.FOUND).body(ipoByRange);
+        if(ipoByRange.size() == 0){ throw new IpoNotFoundException("No Ipo found for the company "+name + " in the given range.");}
+        return ResponseEntity.status(HttpStatus.OK).body(ipoByRange);
     }
-    
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addIpo(@RequestBody Ipo ipo){
+        return ResponseEntity.status(HttpStatus.OK).body(ipoService.addIpo(ipo));
+    }
+
+    @GetMapping("/remove/{id}")
+    public ResponseEntity<String> removeIpo(@PathVariable Integer id) throws IpoNotFoundException{
+        return ResponseEntity.status(HttpStatus.OK).body(ipoService.removeIpo(id));
+    }    
 }

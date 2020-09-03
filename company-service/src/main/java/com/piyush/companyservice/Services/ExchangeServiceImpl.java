@@ -3,13 +3,14 @@ package com.piyush.companyservice.Services;
 import java.util.List;
 import java.util.Optional;
 
-import com.piyush.companyservice.Entities.Company;
+import javax.transaction.Transactional;
+
 import com.piyush.companyservice.Entities.CompanyStockCodes;
 import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Entities.StockExchange;
 import com.piyush.companyservice.Entities.StockPrices;
+import com.piyush.companyservice.Exceptions.StockNotFoundException;
 import com.piyush.companyservice.Repository.CodesRepository;
-import com.piyush.companyservice.Repository.CompanyRepository;
 import com.piyush.companyservice.Repository.ExchangeRepository;
 import com.piyush.companyservice.Repository.IpoRepository;
 import com.piyush.companyservice.Repository.StockPricesRepository;
@@ -23,8 +24,6 @@ public class ExchangeServiceImpl implements ExchangeService {
     @Autowired
     private ExchangeRepository exchangeRepository;
 
-    @Autowired
-    private CompanyRepository companyRepository;
 
     @Autowired
     private CodesRepository codesRepository;
@@ -36,20 +35,21 @@ public class ExchangeServiceImpl implements ExchangeService {
     private IpoRepository ipoRepository;
 
     @Override
+    @Transactional
     public String addExchange(StockExchange ex) {
-        StockExchange data = exchangeRepository.findById(ex.getCode()).get();
-        if(data == null){ 
+       Optional<StockExchange> data = exchangeRepository.findByCodeIgnoreCase(ex.getCode());
+        if(data.isEmpty()){ 
             exchangeRepository.save(ex);
             return "Added " + ex.getStockExName() + " to the DataBase";
         }else{
-            data.setAddress(ex.getAddress());
-            data.setCode(ex.getCode());
-            data.setInfo(ex.getInfo());
-            data.setStockExName(ex.getStockExName());
-            exchangeRepository.save(data);
+            
+            data.get().setAddress(ex.getAddress());
+            data.get().setCode(ex.getCode());
+            data.get().setInfo(ex.getInfo());
+            data.get().setStockExName(ex.getStockExName());
+            //exchangeRepository.save(data);
             return "Updated " + ex.getStockExName();
-        }        
-        
+        }         
     }
 
     @Override
@@ -65,18 +65,23 @@ public class ExchangeServiceImpl implements ExchangeService {
 
     @Override
     public String addCompanyToExchange(CompanyStockCodes csc) {
-        codesRepository.save(csc);
-        String s = "";
-        s.concat(companyRepository.findById(csc.getCompanyCode()).get().getCompanyName()
-                + exchangeRepository.findById(csc.getStockCode()).get().getStockExName());
-        return s;
+        List<CompanyStockCodes> codes = codesRepository.findByCompanyCodeIgnoreCaseAndCompanyNameIgnoreCaseAndStockCodeIgnoreCase(
+                                csc.getCompanyCode(),
+                                csc.getcompanyName(),
+                                csc.getStockCode());
+
+        if(codes.size() == 0){
+            codesRepository.save(csc);
+            return "Added " + csc.getcompanyName() + " to " + exchangeRepository.findByCodeIgnoreCase(csc.getStockCode()).get().getStockExName();
+        }else{
+            return csc.getcompanyName() + " already registered with " + exchangeRepository.findByCodeIgnoreCase(csc.getStockCode()).get().getStockExName();
+        }
     }
 
     @Override
-    public List<Company> getAllCompanies(String id) {
-        List<String> companyIds = codesRepository.findCompanyNameByStockCode(id);
-        List<Company> companies = companyRepository.findByCompanyNameIgnoreCaseIn(companyIds);
-        return companies;
+    public List<CompanyStockCodes> getAllCompanies(String id) {
+        List<CompanyStockCodes> companyIds = codesRepository.findByStockCodeIgnoreCase(id);
+        return companyIds;
     }
 
     @Override
@@ -87,6 +92,14 @@ public class ExchangeServiceImpl implements ExchangeService {
     @Override
     public List<Ipo> getAllIpos(String id) {
         return ipoRepository.findByStockCodeIgnoreCaseOrderByDate(id);
+    }
+
+    @Override
+    public String removeEx(String code) throws StockNotFoundException {
+        Optional<StockExchange> ex = exchangeRepository.findByCodeIgnoreCase(code);
+        ex.orElseThrow(() -> new StockNotFoundException("No StockExchange found with code " + code));
+        exchangeRepository.delete(ex.get());
+        return "Removed " + ex.get().getStockExName() + " from DataBase";
     }
     
 }

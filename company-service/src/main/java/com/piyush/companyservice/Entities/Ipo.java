@@ -26,6 +26,7 @@ public class Ipo {
     private Double pricePerShare;
 
     @DateTimeFormat(iso = ISO.DATE)
+    //@JsonFormat(pattern = "dd/mm/YYYY")
     @Column(name = "open_date")
     private Date date;
 

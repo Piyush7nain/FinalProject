@@ -2,7 +2,6 @@ package com.piyush.companyservice.Controllers;
 
 import java.util.List;
 
-import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.CompanyStockCodes;
 import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Entities.StockExchange;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/exchange")
+@RequestMapping("/exchange")
 public class ExchangeController {
 
     @Autowired
@@ -32,14 +31,14 @@ public class ExchangeController {
 
     @PostMapping("/addUpdateExchange")
     public ResponseEntity<String> addExchange(@RequestBody StockExchange ex){
-        return ResponseEntity.status(HttpStatus.CREATED).body(exchangeService.addExchange(ex));
+        return ResponseEntity.status(HttpStatus.OK).body(exchangeService.addExchange(ex));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<StockExchange>> getAllExchanges() throws StockExchangeNotFoundException{
         List<StockExchange> exchange = exchangeService.getExchange();
-        if(exchange ==null){ throw new StockExchangeNotFoundException("No Stock Exchange Listed in the DataBase");}
-        return ResponseEntity.status(HttpStatus.CREATED).body(exchange);
+        if(exchange.size() ==0){ throw new StockExchangeNotFoundException("No Stock Exchange Listed in the DataBase");}
+        return ResponseEntity.status(HttpStatus.OK).body(exchange);
     }
 
     @GetMapping("/{id}")
@@ -47,31 +46,37 @@ public class ExchangeController {
         
         StockExchange exchangeById = exchangeService.getExchangeById(id);
         if(exchangeById ==null){ throw new StockExchangeNotFoundException("No Stock Exchange found with id "+ id);}
-        return ResponseEntity.status(HttpStatus.CREATED).body(exchangeById);
+        return ResponseEntity.status(HttpStatus.OK).body(exchangeById);
     }
 
+    
     @PostMapping("/addCompany")
     public ResponseEntity<String> addCompanyToExchange(@RequestBody CompanyStockCodes csc){
-        return ResponseEntity.status(HttpStatus.CREATED).body(exchangeService.addCompanyToExchange(csc));
+        return ResponseEntity.status(HttpStatus.OK).body(exchangeService.addCompanyToExchange(csc));
     }
 
     @GetMapping("/{id}/companies")
-    public ResponseEntity<List<Company>> getAllCompanies(@PathVariable String id) throws CompanyNotFoundException{
-        List<Company> allCompanies = exchangeService.getAllCompanies(id);
-        if(allCompanies ==null){ throw new CompanyNotFoundException("No Companies listed in the StockExchange with id "+ id);}
-        return ResponseEntity.status(HttpStatus.FOUND).body(allCompanies);
+    public ResponseEntity<List<CompanyStockCodes>> getAllCompanies(@PathVariable String id) throws CompanyNotFoundException{
+        List<CompanyStockCodes> allCompanies = exchangeService.getAllCompanies(id);
+        if(allCompanies.size() ==0){ throw new CompanyNotFoundException("No Companies listed in the StockExchange with id "+ id);}
+        return ResponseEntity.status(HttpStatus.OK).body(allCompanies);
     }
     @GetMapping("/{id}/stocks")
     public ResponseEntity<List<StockPrices>> getAllStockPrices(@PathVariable String id) throws StockNotFoundException{
         List<StockPrices> allStocks = exchangeService.getAllStocks(id);
-        if(allStocks == null){ throw new StockNotFoundException("No Stocks present in the StockExchange with id "+id);}
-        return ResponseEntity.status(HttpStatus.FOUND).body(allStocks);
+        if(allStocks.size() ==0){ throw new StockNotFoundException("No Stocks present in the StockExchange with id "+id);}
+        return ResponseEntity.status(HttpStatus.OK).body(allStocks);
     }
     @GetMapping("/{id}/ipos")
     public ResponseEntity<List<Ipo>> getAllIpos(@PathVariable String id) throws IpoNotFoundException{
         List<Ipo> allIpos = exchangeService.getAllIpos(id);
-        if(allIpos == null){ throw new IpoNotFoundException("No Ipo's present in the StockExchange with id "+id);}
-        return ResponseEntity.status(HttpStatus.FOUND).body(allIpos);
+        if(allIpos.size() ==0){ throw new IpoNotFoundException("No Ipo's present in the StockExchange with id "+id);}
+        return ResponseEntity.status(HttpStatus.OK).body(allIpos);
+    }
+
+    @GetMapping("/remove/{code}")
+    public ResponseEntity<String> removeExchange(@PathVariable String code) throws StockNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(exchangeService.removeEx(code));
     }
 
     

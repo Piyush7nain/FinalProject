@@ -2,11 +2,11 @@ package com.piyush.companyservice.Services;
 
 import java.util.List;
 
-import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.CompanyStockCodes;
 import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Entities.StockExchange;
 import com.piyush.companyservice.Entities.StockPrices;
+import com.piyush.companyservice.Exceptions.StockNotFoundException;
 
 public interface ExchangeService {
 
@@ -18,10 +18,12 @@ public interface ExchangeService {
 
 	String addCompanyToExchange(CompanyStockCodes csc);
 
-	List<Company> getAllCompanies(String id);
+	List<CompanyStockCodes> getAllCompanies(String id);
 
 	List<StockPrices> getAllStocks(String id);
 
 	List<Ipo> getAllIpos(String id);
+
+	String removeEx(String code) throws StockNotFoundException;
 
 }

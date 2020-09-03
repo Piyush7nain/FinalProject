@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
+import com.piyush.companyservice.Exceptions.IpoNotFoundException;
 import com.piyush.companyservice.Exceptions.RegistrationError;
 import com.piyush.companyservice.models.Dates;
 
 public interface IpoService {
 
-    Ipo addIpo(Ipo ipo);
+    String addIpo(Ipo ipo);
 
     List<Ipo> getAllIpoByCompany(String name) throws CompanyNotFoundException, RegistrationError;
 
@@ -20,6 +21,8 @@ public interface IpoService {
 	List<Ipo> getAllIpo();
 
 	Ipo getIpo(Integer id);
+
+	String removeIpo(Integer id) throws IpoNotFoundException;
 
 
 }

@@ -2,10 +2,16 @@ package com.piyush.companyservice.Entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class CompanyStockCodes {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @Column(name = "company_name")
     private String companyName;
@@ -13,9 +19,8 @@ public class CompanyStockCodes {
     @Column(name = "stock_code")
     private String stockCode;
     
-    @Id
     @Column(name = "company_code")
-    private String CompanyCode;
+    private String companyCode;
 
     public String getcompanyName() {
         return companyName;
@@ -34,11 +39,11 @@ public class CompanyStockCodes {
     }
 
     public String getCompanyCode() {
-        return CompanyCode;
+        return companyCode;
     }
 
     public void setCompanyCode(String companyCode) {
-        CompanyCode = companyCode;
+        this.companyCode = companyCode;
     }
 
     public CompanyStockCodes() {
@@ -47,7 +52,7 @@ public class CompanyStockCodes {
     public CompanyStockCodes(String companyName,String stockCode, String companyCode) {
         this.companyName= companyName;
         this.stockCode = stockCode;
-        CompanyCode = companyCode;
+        this.companyCode = companyCode;
     }
 
     

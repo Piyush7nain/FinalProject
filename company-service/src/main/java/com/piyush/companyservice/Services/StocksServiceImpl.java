@@ -1,11 +1,13 @@
 package com.piyush.companyservice.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Entities.StockPrices;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
 import com.piyush.companyservice.Exceptions.RegistrationError;
+import com.piyush.companyservice.Exceptions.StockNotFoundException;
 import com.piyush.companyservice.Repository.CodesRepository;
 import com.piyush.companyservice.Repository.CompanyRepository;
 import com.piyush.companyservice.Repository.StockPricesRepository;
@@ -69,5 +71,13 @@ public class StocksServiceImpl implements StocksService {
     @Override
     public StockPrices getStockPrices(Integer id) {
         return stockPriceRepository.findById(id).get();
+    }
+
+    @Override
+    public String removeStock(Integer id) throws StockNotFoundException {
+        Optional<StockPrices> stock = stockPriceRepository.findById(id);
+        stock.orElseThrow(() -> new StockNotFoundException("No Ipo found with id "+ id));
+        stockPriceRepository.delete(stock.get());
+        return "Removed stock with id " +id;
     }
 }

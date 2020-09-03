@@ -6,6 +6,8 @@ import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
 import com.piyush.companyservice.Services.CompanyService;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,38 +19,45 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/company")
 public class CompanyController {
 
     CompanyService companyService;
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
     }
-    
 
-    @GetMapping("/company/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Company>> getAllCompany() throws CompanyNotFoundException{
         List<Company> allCompany = companyService.getAllCompany();
-        if(allCompany ==null){throw new CompanyNotFoundException("No Company added to DataBase") ;} 
-        return ResponseEntity.status(HttpStatus.FOUND).body(allCompany);
+        if(allCompany.size() ==0){throw new CompanyNotFoundException("No Company added to DataBase") ;} 
+        return ResponseEntity.status(HttpStatus.OK).body(allCompany);
     }
     
-    @GetMapping("/company/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<List<Company>> getCompanyByName(@PathVariable String name) throws CompanyNotFoundException{
         List<Company> companyByLikeName = companyService.getCompanyByLikeName(name);
-        if(companyByLikeName ==null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
-        return ResponseEntity.status(HttpStatus.FOUND).body(companyByLikeName);
+        if(companyByLikeName.size() ==0){throw new CompanyNotFoundException("No company found with name "+ name) ;}
+        return ResponseEntity.status(HttpStatus.OK).body(companyByLikeName);
     }
     
-
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     //add methods
-    @PostMapping("/company/addCompany")
+    @PostMapping("/addCompany")
     public ResponseEntity<String> addCompany(@RequestBody Company company){
-        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.addCompany(company));
+        logger.info("ADD COMPANY -> {}", company);
+        return ResponseEntity.status(HttpStatus.OK).body(companyService.addCompany(company));
     }
-    @PostMapping("/company/updateCompany")
+    @PostMapping("/updateCompany")
     public ResponseEntity<String> updateCompany(@RequestBody Company company){
-        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.updateCompany(company));
+        return ResponseEntity.status(HttpStatus.OK).body(companyService.updateCompany(company));
+    }
+
+    @GetMapping("/remove/{name}")
+    public ResponseEntity<String> removeCompanyByName(@PathVariable String name) throws CompanyNotFoundException{
+        String removeCompany = companyService.removeCompany(name);
+        if(removeCompany ==null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
+        return ResponseEntity.status(HttpStatus.OK).body(removeCompany);
     }
 
 }

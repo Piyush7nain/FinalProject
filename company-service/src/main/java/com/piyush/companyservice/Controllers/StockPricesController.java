@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/Stocks")
+@RequestMapping("/stocks")
 public class StockPricesController {
 
     @Autowired
@@ -29,10 +29,10 @@ public class StockPricesController {
     @GetMapping("/all")
     public ResponseEntity<List<StockPrices>> getAllStocks() throws StockNotFoundException {
         List<StockPrices> allStocks = stocksService.getAllStocks();
-        if (allStocks == null) {
+        if (allStocks.size() == 0) {
             throw new StockNotFoundException("No Stocks listed anywhere");
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(allStocks);
+        return ResponseEntity.status(HttpStatus.OK).body(allStocks);
     }
 
     @GetMapping("/{id}")
@@ -41,17 +41,17 @@ public class StockPricesController {
         if (stocks == null) {
             throw new StockNotFoundException("No Stocks found with Id " + id);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(stocks);
+        return ResponseEntity.status(HttpStatus.OK).body(stocks);
     }
 
     @GetMapping("/company/{name}/all")
     public ResponseEntity<List<StockPrices>> getStockPricesByName(@PathVariable String name)
             throws CompanyNotFoundException, StockNotFoundException, RegistrationError {
         List<StockPrices> allStockPricesByName = stocksService.getAllStockPricesByName(name);
-        if (allStockPricesByName == null) {
+        if (allStockPricesByName.size() == 0) {
             throw new StockNotFoundException("No stocks found for " + name);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(allStockPricesByName);
+        return ResponseEntity.status(HttpStatus.OK).body(allStockPricesByName);
     }
 
     @GetMapping("/company/{name}/stockEx/{stockCode}")
@@ -60,21 +60,26 @@ public class StockPricesController {
             throws CompanyNotFoundException, RegistrationError, StockNotFoundException {
         
         List<StockPrices> stockPriceByCompanyStockEx = stocksService.getStockPriceByCompanyStockEx(name, stockCode);
-        if(stockPriceByCompanyStockEx == null){ throw new StockNotFoundException("No stocks found for " + name+ " in StockExchange "+ stockCode);}
-        return ResponseEntity.status(HttpStatus.FOUND).body(stockPriceByCompanyStockEx);
+        if(stockPriceByCompanyStockEx.size() == 0){ throw new StockNotFoundException("No stocks found for " + name+ " in StockExchange "+ stockCode);}
+        return ResponseEntity.status(HttpStatus.OK).body(stockPriceByCompanyStockEx);
     }
 
     @PostMapping("/company/{name}/range")
     public ResponseEntity<List<StockPrices>> getStockPricesByRange(@RequestBody Dates dates, @PathVariable String name) throws CompanyNotFoundException, StockNotFoundException,
             RegistrationError {
         List<StockPrices> stockPricesByRange = stocksService.getStockPricesByRange(dates, name);
-        if(stockPricesByRange == null){ throw new StockNotFoundException("No stocks found for " + name +" in the given range");}
-        return ResponseEntity.status(HttpStatus.FOUND).body(stockPricesByRange);
+        if(stockPricesByRange.size() == 0){ throw new StockNotFoundException("No stocks found for " + name +" in the given range");}
+        return ResponseEntity.status(HttpStatus.OK).body(stockPricesByRange);
     }
 
-    @PostMapping("/company/addStock")
+    @PostMapping("/add")
     public ResponseEntity<String> addStock(@RequestBody StockPrices sp){
-        return ResponseEntity.status(HttpStatus.CREATED).body(stocksService.addStock(sp));
+        return ResponseEntity.status(HttpStatus.OK).body(stocksService.addStock(sp));
+    }
+
+    @GetMapping("/remove/{id}")
+    public ResponseEntity<String> removeIpo(@PathVariable Integer id) throws StockNotFoundException{
+        return ResponseEntity.status(HttpStatus.OK).body(stocksService.removeStock(id));
     }
     
 }

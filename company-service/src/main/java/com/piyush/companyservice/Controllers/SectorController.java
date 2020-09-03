@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/sector")
+@RequestMapping("/sector")
 public class SectorController {
 
     @Autowired
@@ -27,28 +27,28 @@ public class SectorController {
 
     @PostMapping("/addSector")
     public ResponseEntity<String> addSector(@RequestBody Sector sector){
-        return ResponseEntity.status(HttpStatus.CREATED).body(sectorService.addSector(sector));
+        return ResponseEntity.status(HttpStatus.OK).body(sectorService.addSector(sector));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Sector>> getAllSector() throws SectorNotFoundException{
         List<Sector> allsectors = sectorService.getAllsectors();
-        if(allsectors == null){throw new SectorNotFoundException("No Sectors present in DataBase");}
-        return ResponseEntity.status(HttpStatus.FOUND).body(allsectors);
+        if(allsectors.size() == 0){throw new SectorNotFoundException("No Sectors present in DataBase");}
+        return ResponseEntity.status(HttpStatus.OK).body(allsectors);
     }
 
     @GetMapping("/{name}")
     public ResponseEntity<Sector> getSector(@PathVariable String name)throws SectorNotFoundException{
         Sector getsector = sectorService.getsector(name);
         if(getsector == null){throw new SectorNotFoundException("No sector Found with given name,try modifying the name");}
-        return ResponseEntity.status(HttpStatus.FOUND).body(getsector);
+        return ResponseEntity.status(HttpStatus.OK).body(getsector);
     }
 
     @GetMapping("/{name}/companies")
     public ResponseEntity<List<Company>> getAllCompanies(@PathVariable String name) throws SectorNotFoundException, CompanyNotFoundException{
         List<Company> allCompanies = sectorService.getAllCompanies(name);
-        if(allCompanies == null){throw new SectorNotFoundException("No Sectors found with given name");}
-        return ResponseEntity.status(HttpStatus.FOUND).body(allCompanies);
+        if(allCompanies.size() == 0){throw new SectorNotFoundException("No Sectors found with given name");}
+        return ResponseEntity.status(HttpStatus.OK).body(allCompanies);
     }
     
 }

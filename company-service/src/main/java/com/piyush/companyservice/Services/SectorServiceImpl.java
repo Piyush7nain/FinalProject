@@ -32,8 +32,8 @@ public class SectorServiceImpl implements SectorService {
     }
 
     @Override
-    public Sector getsector(String id) {
-        return sectorRepository.findById(id).get();
+    public Sector getsector(String name) {
+        return sectorRepository.findBySectorName(name);
     }
 
     @Override
