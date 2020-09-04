@@ -73,13 +73,18 @@ public class StockPricesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addStock(@RequestBody StockPrices sp){
-        return ResponseEntity.status(HttpStatus.OK).body(stocksService.addStock(sp));
+    public String addStock(@RequestBody StockPrices sp){
+        return stocksService.addStock(sp);
     }
 
     @GetMapping("/remove/{id}")
-    public ResponseEntity<String> removeIpo(@PathVariable Integer id) throws StockNotFoundException{
+    public ResponseEntity<String> removeStocks(@PathVariable Integer id) throws StockNotFoundException{
         return ResponseEntity.status(HttpStatus.OK).body(stocksService.removeStock(id));
+    }
+
+    @GetMapping("/remove/all")
+    public ResponseEntity<String> removeAll() throws StockNotFoundException{
+        return ResponseEntity.status(HttpStatus.OK).body(stocksService.removeAll());
     }
     
 }

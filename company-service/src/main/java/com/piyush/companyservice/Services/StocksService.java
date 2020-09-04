@@ -18,12 +18,13 @@ public interface StocksService {
 	
 	String addStock(StockPrices sp);
 
-
 	List<StockPrices> getAllStocks();
 
 	StockPrices getStockPrices(Integer id);
 
 	String removeStock(Integer id) throws StockNotFoundException;
+
+	String removeAll();
     
 
 }

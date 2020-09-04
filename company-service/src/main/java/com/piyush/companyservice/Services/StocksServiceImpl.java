@@ -80,4 +80,10 @@ public class StocksServiceImpl implements StocksService {
         stockPriceRepository.delete(stock.get());
         return "Removed stock with id " +id;
     }
+
+    @Override
+    public String removeAll() {
+        stockPriceRepository.deleteAll();
+        return "Removed all stocks in DataBase";
+    }
 }

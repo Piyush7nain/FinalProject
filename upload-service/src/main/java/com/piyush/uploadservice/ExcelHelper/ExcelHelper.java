@@ -39,10 +39,9 @@ public class ExcelHelper {
             int rowNum = sheet.getLastRowNum()+1;
             for(int i =1;i<rowNum;i++){
                 Row row = sheet.getRow(i);
-                if(row.getRowNum() == 0){continue;}
-
+                if(row.getRowNum() == 0){continue;}                
                 StockPrices sp = new StockPrices(
-                    row.getCell(0,MissingCellPolicy.RETURN_BLANK_AS_NULL).getStringCellValue(),
+                    Integer.toString((int)row.getCell(0,MissingCellPolicy.RETURN_BLANK_AS_NULL).getNumericCellValue()),
                     row.getCell(1,MissingCellPolicy.RETURN_BLANK_AS_NULL).getStringCellValue(),
                     row.getCell(2,MissingCellPolicy.RETURN_BLANK_AS_NULL).getNumericCellValue(),
                     row.getCell(3,MissingCellPolicy.RETURN_BLANK_AS_NULL).getDateCellValue(),

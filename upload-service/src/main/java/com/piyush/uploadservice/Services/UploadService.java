@@ -22,6 +22,8 @@ public class UploadService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+   
+
     public SummaryDto uploadExcel(MultipartFile file) throws Exception {
         //check for excel and generate inputStream
         String fileName = file.getOriginalFilename();
@@ -36,7 +38,14 @@ public class UploadService {
         logger.info("extracted data from excel");
         
         stockRepository.saveAll(stockList);
-        return this.getSummary(stockList);
+       /*  for (StockPrices stockPrices : stockList) {
+            client.addStock(stockPrices);            
+        } */
+        logger.info("Added all the stocks to Database");
+        
+        SummaryDto summary = this.getSummary(stockList);
+        logger.info("Summary -> {}", summary);
+        return summary;
 
     }
 
@@ -53,8 +62,13 @@ public class UploadService {
 	            
 	            summaryDto.setStartDate(stockList.get(0).getDate());
 	            summaryDto.setEndDate(stockList.get(stockList.size()-1).getDate());
-	        }
+            }
+            logger.info("prepared summary");    
         return summaryDto ;
     }
+
+	public List<StockPrices> getAllStocks() {
+		return stockRepository.findAll();
+	}
 
 }
