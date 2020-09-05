@@ -1,6 +1,8 @@
 package com.piyush.companyservice.Controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.piyush.companyservice.Entities.CompanyStockCodes;
 import com.piyush.companyservice.Entities.Ipo;
@@ -30,8 +32,11 @@ public class ExchangeController {
     private ExchangeService exchangeService;
 
     @PostMapping("/addUpdateExchange")
-    public ResponseEntity<String> addExchange(@RequestBody StockExchange ex){
-        return ResponseEntity.status(HttpStatus.OK).body(exchangeService.addExchange(ex));
+    public ResponseEntity<Map<String, String>> addExchange(@RequestBody StockExchange ex){
+        String addEx = exchangeService.addExchange(ex);
+        Map<String, String> map = new HashMap<>();
+        map.put("status", addEx);
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
     @GetMapping("/all")

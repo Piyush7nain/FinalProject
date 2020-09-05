@@ -1,0 +1,36 @@
+
+<div class="card">
+    <div class="card-body">
+      <table class="table ">
+        <thead class="bg-dark text-light">
+          <tr>
+            <td>Stock Exchange</td>
+            <td>StockEx Code</td>
+            <td>Address</td>
+            <td>Info</td>
+          </tr>
+        </thead>
+        <tbody >
+          <tr>
+            <td>{{stockEx.stockExName}}</td>
+            <td>{{stockEx.code}}</td>
+            <td>{{stockEx.address}}</td>
+            <td>{{stockEx.info}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div>
+        <div class="row">
+            <button class="btn btn-outline-primary col-sm" (click)="onShowIpo()"> IPO</button>
+            <button class="btn btn-outline-primary col-sm"> STOCKS</button>
+            <button class="btn btn-outline-primary col-sm"> COMPANY</button>
+        </div>
+      </div>
+      
+      <div class ="container mt-3" *ngIf="showIpo">
+        <app-ipo [stockCode]="stockEx.code" ></app-ipo>
+      </div>
+    </div>
+  </div>
+  

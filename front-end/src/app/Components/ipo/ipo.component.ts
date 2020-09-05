@@ -15,8 +15,12 @@ export class IpoComponent implements OnInit {
   constructor(private ipoService:IpoService, private stockExService: StockExService) {}
 
   @Input()
-  companyName:string;
+  companyName:string = null;
   ipos:Ipo[];
+
+  @Input()
+  stockCode:string = null;
+
   newIpo:Ipo ={
     companyCode:'',
     stockCode:'',
@@ -29,10 +33,17 @@ export class IpoComponent implements OnInit {
   showIpoForm:boolean = false;
 
   ngOnInit(): void {
-    this.stockExService.getAllExchanges().subscribe(data => this.stockExs = data);
-    this.ipoService.getAllIpo(this.companyName).subscribe(data=>{
-      this.ipos= data;
-    })
+    if(this.companyName != null){
+      this.stockExService.getAllExchanges().subscribe(data => this.stockExs = data);
+      this.ipoService.getAllIpoByCompanyName(this.companyName).subscribe(data=>{
+        this.ipos= data;
+      })
+    } else if(this.stockCode  != null){
+        this.ipoService.getAllIpoByStockCode(this.stockCode).subscribe(data=>{
+          this.ipos= data;
+        })
+      }
+
   }
 
 
@@ -47,7 +58,7 @@ export class IpoComponent implements OnInit {
     this.showIpoForm = false;
     this.ipoService.addIpo(this.newIpo, name).subscribe(data=>{
       if(data.status == 'successful'){
-        this.ipoService.getAllIpo(this.companyName).subscribe(data=>{
+        this.ipoService.getAllIpoByCompanyName(this.companyName).subscribe(data=>{
           this.ipos= data;
         })
       }

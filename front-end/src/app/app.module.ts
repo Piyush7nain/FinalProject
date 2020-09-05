@@ -19,6 +19,9 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { CompanyComponent } from './components/company/company.component';
 import { IpoComponent } from './components/ipo/ipo.component';
 import { ShowCompanyComponent } from './components/show-company/show-company.component';
+import { StockExComponent } from './components/stock-ex/stock-ex.component';
+import { StockExAddFormComponent } from './components/stock-ex-add-form/stock-ex-add-form.component';
+import { ShowStockExComponent } from './components/show-stock-ex/show-stock-ex.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { ShowCompanyComponent } from './components/show-company/show-company.com
     AdminNavbarComponent,
     CompanyComponent,
     IpoComponent,
-    ShowCompanyComponent
+    ShowCompanyComponent,
+    StockExComponent,
+    StockExAddFormComponent,
+    ShowStockExComponent
   ],
   imports: [
     BrowserModule,

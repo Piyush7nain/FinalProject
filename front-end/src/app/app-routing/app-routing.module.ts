@@ -5,6 +5,7 @@ import { LoginComponent } from '../components/login/login.component';
 import { SignupComponent } from '../components/signup/signup.component';
 import { AdminPageComponent } from '../components/admin-page/admin-page.component';
 import { CompanyComponent } from '../components/company/company.component';
+import { StockExComponent } from '../components/stock-ex/stock-ex.component';
 
 
 const routes: Routes =[
@@ -12,7 +13,8 @@ const routes: Routes =[
   {path: 'login', component:LoginComponent},
   {path:'signup',component:SignupComponent},
   {path:'admin-page', component:AdminPageComponent},
-  {path:'company',component:CompanyComponent}
+  {path:'company',component:CompanyComponent},
+  {path:'stockEx', component:StockExComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -40,15 +40,14 @@ public class ExchangeServiceImpl implements ExchangeService {
        Optional<StockExchange> data = exchangeRepository.findByCodeIgnoreCase(ex.getCode());
         if(data.isEmpty()){ 
             exchangeRepository.save(ex);
-            return "Added " + ex.getStockExName() + " to the DataBase";
+            return "successful";
         }else{
-            
             data.get().setAddress(ex.getAddress());
             data.get().setCode(ex.getCode());
             data.get().setInfo(ex.getInfo());
             data.get().setStockExName(ex.getStockExName());
             //exchangeRepository.save(data);
-            return "Updated " + ex.getStockExName();
+            return "successful";
         }         
     }
 

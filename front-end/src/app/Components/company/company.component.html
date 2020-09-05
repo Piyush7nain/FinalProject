@@ -1,13 +1,14 @@
 <app-admin-navbar></app-admin-navbar>
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <!-- <a routerLink ="/" class="nav-brand mr-4"> Company Services </a> -->
-  <!-- <button class="navbar-toggler" type ="button" data-toggle ="collapase" data-target="#navContent"
-  aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation" >
+  <a class="navbar-brand" routerLink="/">Company Services</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" 
+    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button> -->
+  </button>
 
-  <div id ="navContent"class ="mx-auto">
-    <ul class="navbar-nav  ">
+  <div id ="navbarSupportedContent" class="collapse navbar-collapse ">
+    <ul class="navbar-nav mx-auto">
       <li class="nav-item mr-5">
         <button class="nav-link btn btn-outline-primary" (click) = "onAdd()" >Add New Company</button>
       </li>

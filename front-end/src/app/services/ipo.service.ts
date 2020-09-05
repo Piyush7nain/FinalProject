@@ -9,9 +9,19 @@ export class IpoService {
 
   constructor(private apiService: ApiServiceService) { }
   baseUrl:string ="company-service/ipo/";
-  getAllIpo(name:string):Observable<any>{
+
+  getAllIpoByCompanyName(name:string):Observable<any>{
     let list:BehaviorSubject<any> = new BehaviorSubject<any>([]);
     this.apiService.get(this.baseUrl+"company/"+name+"/all").subscribe(data=>{
+      console.log(data);
+      list.next(data)
+    })
+    return list;
+  }
+
+  getAllIpoByStockCode(code:string):Observable<any>{
+    let list:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    this.apiService.get("company-service/exchange/"+code+"/ipos").subscribe(data=>{
       console.log(data);
       list.next(data)
     })

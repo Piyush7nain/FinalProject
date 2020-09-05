@@ -1,0 +1,56 @@
+<app-admin-navbar></app-admin-navbar>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/">Stock Exchange Services</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div id ="navbarSupportedContent" class="collapse navbar-collapse ">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item ">
+              <button class="nav-link btn btn-outline-primary ml-3 mr-3" (click) = "onAdd()">Add New Exchange</button>
+            </li>
+            <li class="nav-item">
+                <button class = "nav-link btn btn-outline-success ml-3 mr-3" (click)="getExchange()">All Exchanges</button>
+            </li>
+            <li class="nav-item">
+              <button class=" nav-link btn btn-outline-success ml-3 mr-3" type="submit" (click) ="onUpload()">Upload Stocks</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div *ngIf="showAddForm">
+    <div class="container my-3">
+        <div class="text-center"><h2> Add New Stock Exchange</h2></div>
+        <form>
+            <div class="form-group">
+              <label >Stock Exchange Name</label>
+              <input class="form-control" type="text" name="stockExName" [(ngModel)] ="stockEx.stockExName">
+            </div>
+            <div class="form-group">
+              <label>Stock Code</label>
+              <input  class="form-control" type="text" name="stockCode"[(ngModel)] ="stockEx.code">
+            </div>
+            <div class="form-group">
+              <label>Info</label>
+              <input  class="form-control" type="text" name="turnover"[(ngModel)] ="stockEx.info">
+            </div>
+            <div class="form-group">
+              <label>Address</label>
+              <input class="form-control" type="text" name="address"[(ngModel)] ="stockEx.address">
+            </div>
+            <button class="btn btn-success btn-block" (click) ="addStockEx()"> Add </button>
+        </form>
+    </div>
+</div>
+
+<div class="container text-center" *ngIf="showMessage"><h3>{{this.message}}</h3></div>
+
+<div *ngIf="showStockExs">
+    <div *ngFor="let stockEx of stockExs">
+        <app-show-stock-ex [stockEx]="stockEx"></app-show-stock-ex>
+    </div>
+</div>
