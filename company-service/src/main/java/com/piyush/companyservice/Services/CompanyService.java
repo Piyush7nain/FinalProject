@@ -13,7 +13,7 @@ public interface CompanyService {
 
 	String addCompany(Company company);
 
-	String updateCompany(Company company);
+	String updateCompany(Company company, String name);
 
 	String removeCompany(String name) throws CompanyNotFoundException;
 

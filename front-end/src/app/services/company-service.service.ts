@@ -44,9 +44,9 @@ export class CompanyServiceService {
     return list;
   }
 
-  updateCompany(obj:any):Observable<any>{
+  updateCompany(obj:any, name:any):Observable<any>{
     let status:BehaviorSubject<string> = new BehaviorSubject<string>('');
-    this.apiService.post("company-service/company/updateCompany", obj).subscribe(data =>{
+    this.apiService.post("company-service/company/updateCompany/"+name , obj).subscribe(data =>{
       console.log(data);
       status.next(data.status);
     })

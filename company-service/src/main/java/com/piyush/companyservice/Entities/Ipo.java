@@ -9,9 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 @Entity
 public class Ipo {
 
@@ -25,7 +22,7 @@ public class Ipo {
 
     private Double pricePerShare;
 
-    @DateTimeFormat(iso = ISO.DATE)
+    //@DateTimeFormat(iso = ISO.DATE)
     //@JsonFormat(pattern = "dd/mm/YYYY")
     @Column(name = "open_date")
     private Date date;

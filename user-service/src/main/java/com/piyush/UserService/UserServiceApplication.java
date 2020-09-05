@@ -29,6 +29,7 @@ public class UserServiceApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		userRepository.deleteAll();
 		userRepository.save(new User("admin", "admin","admin","admin","admin","admin"));
 	}
 

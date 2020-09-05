@@ -10,7 +10,7 @@ import com.piyush.companyservice.models.Dates;
 
 public interface IpoService {
 
-    String addIpo(Ipo ipo);
+    String addIpo(Ipo ipo, String name);
 
     List<Ipo> getAllIpoByCompany(String name) throws CompanyNotFoundException, RegistrationError;
 

@@ -1,6 +1,8 @@
 package com.piyush.companyservice.Controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
@@ -73,13 +75,19 @@ public class IpoController {
         return ResponseEntity.status(HttpStatus.OK).body(ipoByRange);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addIpo(@RequestBody Ipo ipo){
-        return ResponseEntity.status(HttpStatus.OK).body(ipoService.addIpo(ipo));
+    @PostMapping("/add/{name}")
+    public ResponseEntity<Map<String, String>> addIpo(@RequestBody Ipo ipo, @PathVariable String name){
+        String addIpo = ipoService.addIpo(ipo, name);
+        Map<String, String> map = new HashMap<>();
+        map.put("status", addIpo);
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
     @GetMapping("/remove/{id}")
-    public ResponseEntity<String> removeIpo(@PathVariable Integer id) throws IpoNotFoundException{
-        return ResponseEntity.status(HttpStatus.OK).body(ipoService.removeIpo(id));
+    public ResponseEntity<Map<String, String>> removeIpo(@PathVariable Integer id) throws IpoNotFoundException{
+        Map<String, String> map = new HashMap<>();
+        String removeIpo = ipoService.removeIpo(id);
+        map.put("status", removeIpo);
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }    
 }

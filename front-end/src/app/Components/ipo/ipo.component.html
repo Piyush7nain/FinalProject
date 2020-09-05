@@ -1,0 +1,57 @@
+
+<div class="card">
+  <div class="card-body">
+    <table class="table ">
+      <thead class="bg-dark text-light">
+        <tr>
+          <td>Company Code</td>
+          <td>Stock Code</td>
+          <td>Price Per Share</td>
+          <td>Date</td>
+          <td>Remarks</td>
+          <td>Remove</td>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let ipo of ipos">
+          <td> {{ipo.companyCode}}</td>
+          <td> {{ipo.stockCode}}</td>
+          <td> {{ipo.pricePerShare}}</td>
+          <td> {{ipo.date | date}}</td>
+          <td> {{ipo.remarks}}</td>
+          <td><button class="btn btn-danger" (click)="removeIpo(ipo)">Remove</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <button class="btn btn-success btn-block" (click)="this.showIpoForm=!this.showIpoForm"> Add New Ipo</button>
+    <div *ngIf ="showIpoForm">
+      <form>
+        <div class="form-group">
+          <label>Company Code</label>
+          <input class="form-control" type="text" name="companyCode" [(ngModel)]="newIpo.companyCode">
+        </div>
+        <div class="form-group">
+          <label>Stock Code</label>
+          <select class="form-control" type="text" name="stockCode" [(ngModel)]="newIpo.stockCode">
+            <option *ngFor="let stockEx of this.stockExs"> {{stockEx.code}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input class="form-control" placeholder ='YYYY-MM-dd' type="text" name="date" [(ngModel)]="newIpo.date">
+        </div>
+        <div class="form-group">
+          <label>Price Per Share</label>
+          <input class="form-control" type="text" name="pricePerShare" [(ngModel)]="newIpo.pricePerShare">
+        </div>
+        <div class="form-group">
+          <label>Remarks</label>
+          <input class="form-control" type="text" name="remarks" [(ngModel)]="newIpo.remarks">
+        </div>
+      </form>
+      <button class="btn btn-success btn-block" (click)="addIpo()"> Add </button>
+    </div>
+
+  </div>
+</div>

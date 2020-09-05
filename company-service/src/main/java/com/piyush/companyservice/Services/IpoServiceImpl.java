@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.piyush.companyservice.Entities.Company;
+import com.piyush.companyservice.Entities.CompanyStockCodes;
 import com.piyush.companyservice.Entities.Ipo;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
 import com.piyush.companyservice.Exceptions.IpoNotFoundException;
@@ -30,9 +31,15 @@ public class IpoServiceImpl implements IpoService {
     CodesRepository codesRepository;
 
     @Override
-    public String addIpo(Ipo ipo) {
-        ipoRepository.save(ipo);
-        return "Added new Ipo for "+ ipo.getCompanyCode() + " in StockExchange "+ ipo.getStockCode();
+    public String addIpo(Ipo ipo, String name) {
+        CompanyStockCodes codes = codesRepository.findCompanyCodeByCompanyNameIgnoreCaseAndStockCodeIgnoreCase(
+                            companyRepository.findByCompanyNameIgnoreCase(name).getCompanyName(), ipo.getStockCode());
+       
+        if(codes==null){
+            codesRepository.save(new CompanyStockCodes(name, ipo.getStockCode(),ipo.getCompanyCode()));
+        }  
+        ipoRepository.save(ipo);      
+        return "successful";
     }
 
     @Override

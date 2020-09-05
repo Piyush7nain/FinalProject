@@ -58,10 +58,10 @@ public class CompanyController {
         map.put("status", companyService.addCompany(company));
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }
-    @PostMapping("/updateCompany")
-    public ResponseEntity<Map<String, String>> updateCompany(@RequestBody Company company){
+    @PostMapping("/updateCompany/{name}")
+    public ResponseEntity<Map<String, String>> updateCompany(@RequestBody Company company, @PathVariable String name){
         Map<String, String> map = new HashMap<>();
-        map.put("status", companyService.updateCompany(company));
+        map.put("status", companyService.updateCompany(company, name));
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 

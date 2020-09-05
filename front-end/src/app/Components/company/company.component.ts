@@ -22,8 +22,6 @@ export class CompanyComponent implements OnInit {
      showIpo:false
   }
 
-  editProperty:any;
-  placeholder:string;
   message:string;
   showAddCompany:boolean = false;
   companyRegistered:boolean = false;
@@ -90,32 +88,4 @@ export class CompanyComponent implements OnInit {
     })
   }
 
-  onEdit(placeholder:string){
-    this.showEditBox = !this.showEditBox;
-    this.placeholder = placeholder;
-  }
-  updateCompany(company:Company){
-
-    console.log(company)
-
-    switch(this.placeholder){
-      case "Company Name":
-        company.companyName = this.editProperty;
-        break;
-    case "Turnover":
-      company.turnover = Number(this.editProperty);
-      break;
-    case "Company Details":
-      company.companyDetails = this.editProperty;
-      break;
-    case "Sector Name":
-      company.sectorName = this.editProperty;
-      break;
-    }
-    this.placeholder =null;
-    this.showEditBox =false;
-    this.companyService.updateCompany(company);
-    this.editProperty=null
-
-  }
 }

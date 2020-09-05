@@ -8,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 @Entity
 public class StockPrices {
 
@@ -25,7 +22,7 @@ public class StockPrices {
     private Double currentPrice;
 
     @Column(name = "Date_")
-    @DateTimeFormat(iso = ISO.DATE)
+   //@DateTimeFormat(iso = ISO.DATE)
 	private Date date;
 	
 	@Column(name = "time_")

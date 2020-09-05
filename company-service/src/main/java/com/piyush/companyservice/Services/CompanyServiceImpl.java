@@ -42,11 +42,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public String updateCompany(Company company) {
-        Company data = companyRepository.findByCompanyNameIgnoreCase(company.getCompanyName());
+    public String updateCompany(Company company, String name) {
+        Company data = companyRepository.findByCompanyNameIgnoreCase(name);
         if(data ==null){
             companyRepository.save(company);
-            return "failed";
+            return "new Upload";
         }else{
             data.setCompanyDetails(company.getCompanyDetails());
             data.setSectorName(company.getSectorName());

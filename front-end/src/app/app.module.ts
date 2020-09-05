@@ -6,7 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiServiceService } from '../app/services/api-service.service';
 import { LoginServiceService } from '../app/services/login-service.service';
 import { UserInfoService } from '../app/services/user-info.service';
-import { CompanyServiceService } from '../app/services/company-service.service'
+import { CompanyServiceService } from '../app/services/company-service.service';
+import { IpoService } from '../app/services/ipo.service';
+import { StockExService } from '../app/services/stock-ex.service'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,6 +17,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { CompanyComponent } from './components/company/company.component';
+import { IpoComponent } from './components/ipo/ipo.component';
+import { ShowCompanyComponent } from './components/show-company/show-company.component';
 
 
 @NgModule({
@@ -24,7 +28,9 @@ import { CompanyComponent } from './components/company/company.component';
     SignupComponent,
     AdminPageComponent,
     AdminNavbarComponent,
-    CompanyComponent
+    CompanyComponent,
+    IpoComponent,
+    ShowCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +42,9 @@ import { CompanyComponent } from './components/company/company.component';
     ApiServiceService,
     LoginServiceService,
     UserInfoService,
-    CompanyServiceService
-
+    CompanyServiceService,
+    IpoService,
+    StockExService
   ],
   bootstrap: [AppComponent]
 })
