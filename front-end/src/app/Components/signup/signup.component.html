@@ -7,6 +7,31 @@
 
       <!-- To use ngModule we need to import forms module in out app.module.ts and also add it to the imports section in the same file -->
       <div class="form-group">
+        <label>UserId</label>
+        <input
+          type="text"
+          name ="userId"
+          class="form-control is-invalid"
+          [(ngModel)] = "newUser.userId"
+          #userId ="ngModel"
+          [ngClass] = "{'is-invalid': userId.errors && userId.touched}"
+          required
+          minlength = "2" >
+        <div class="invalid-feedback"
+          [hidden] = "!userId.errors?.required">
+          UserId Required
+        </div>
+        <div class="invalid-feedback"
+          [hidden] = "!userId.errors?.minlength">
+          Must be atleast 2 characters
+        </div>
+      <div style = "color:red; font-size:15px;"
+          *ngIf = "this.showError">
+          UserId already Exists
+        </div>
+      </div>
+
+      <div class="form-group">
         <label>First Name</label>
         <input
           type="text"

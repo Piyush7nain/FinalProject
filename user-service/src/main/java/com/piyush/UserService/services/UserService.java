@@ -1,6 +1,8 @@
 package com.piyush.UserService.services;
 
 
+import java.util.List;
+
 import com.piyush.UserService.exceptions.UserNotFoundException;
 import com.piyush.UserService.shared.Header;
 import com.piyush.UserService.shared.UserAuthenticate;
@@ -9,12 +11,16 @@ import com.piyush.UserService.shared.UserResponseModel;
 
 public interface UserService {
 
-	public void createNewUser(UserRequestModel userRequestModel);
+	public String createNewUser(UserRequestModel userRequestModel);
 
-	public Object getAllUsers();
+	public List<UserResponseModel> getAllUsers();
 
 
 	public UserResponseModel getUserByUserId(String id) throws UserNotFoundException;
 
 	public Header authenticateUser(UserAuthenticate user) ;
+
+	public String removeUser(String userId) throws UserNotFoundException;
+
+	public String removeAll();
 }

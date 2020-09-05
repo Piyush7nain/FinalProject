@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
         password :this.password
     }
     this.loginService.login(userInput).subscribe(data =>{
-      if(data.status == "successful" && data.role =="admin"){alert("welcome admin")}
-      if(data.status == "successful" && data.role =="user"){ alert("welcome user")}
+      if(data.status == "successful" && data.role =="admin"){this.router.navigate(['admin-page'])}
+      if(data.status == "successful" && data.role =="user"){ this.router.navigate(['user-page'])}
       if(data.status == "login-failed" ){ this.router.navigate(['login']); this.showError = true}
     })
 

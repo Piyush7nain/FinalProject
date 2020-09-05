@@ -16,5 +16,7 @@ public interface CompanyService {
 	String updateCompany(Company company);
 
 	String removeCompany(String name) throws CompanyNotFoundException;
+
+	Company getCompanyByName(String name);
     
 }

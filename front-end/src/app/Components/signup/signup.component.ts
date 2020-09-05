@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
     lastName:'',
     email:''
   }
+  showError:boolean = false;
 
   constructor(private loginService: LoginServiceService, private router: Router) { }
 
@@ -25,8 +26,17 @@ export class SignupComponent implements OnInit {
 
   onSignup(){
     this.loginService.signup(this.newUser).subscribe(data =>{
-      if(data =='successful'){ this.router.navigate(['login'])}
-    })
+      if(data =='successful'){
+        this.showError=false;
+        this.router.navigate(['login']);
+      }
+      if(data =="failed"){
+        this.showError = true;
+        this.newUser = {userId:'',firstName:'',lastName:'',email:'',password:''}
+        //alert("failed");
+      }
+    } )
   }
 
 }
+//

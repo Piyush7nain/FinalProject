@@ -33,10 +33,10 @@ public class CompanyServiceImpl implements CompanyService {
         
         if(companyRepository.findByCompanyNameIgnoreCase(company.getCompanyName()) == null){
             companyRepository.save(company);
-            return "Added company " + company.getCompanyName() + " to DataBase";
+            return "successful";
         }
         else{
-            return "Company already exist, use update request to update data";
+            return "failed";
         }
     }
 
@@ -46,14 +46,14 @@ public class CompanyServiceImpl implements CompanyService {
         Company data = companyRepository.findByCompanyNameIgnoreCase(company.getCompanyName());
         if(data ==null){
             companyRepository.save(company);
-            return "No existing record of the company found, added new company" + company.getCompanyName()+ " to DataBase";
+            return "failed";
         }else{
             data.setCompanyDetails(company.getCompanyDetails());
             data.setSectorName(company.getSectorName());
             data.setCompanyName(company.getCompanyName());
             data.setTurnover(company.getTurnover());      
             //companyRepository.saveAndFlush(data);
-            return "Udpated company "+ data.getCompanyName();
+            return "successful";
         }
         
     }
@@ -65,6 +65,11 @@ public class CompanyServiceImpl implements CompanyService {
         if(company == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
         companyRepository.delete(company);
         return "Removed " + company.getCompanyName() + " from Database.";
+    }
+
+    @Override
+    public Company getCompanyByName(String name) {
+        return companyRepository.findByCompanyNameIgnoreCase(name);
     }
     
 }

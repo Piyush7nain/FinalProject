@@ -1,6 +1,8 @@
 package com.piyush.companyservice.Controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.piyush.companyservice.Entities.Company;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
@@ -34,23 +36,33 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(allCompany);
     }
     
-    @GetMapping("/{name}")
-    public ResponseEntity<List<Company>> getCompanyByName(@PathVariable String name) throws CompanyNotFoundException{
+    @GetMapping("/like/{name}")
+    public ResponseEntity<List<Company>> getCompanyByLikeName(@PathVariable String name) throws CompanyNotFoundException{
         List<Company> companyByLikeName = companyService.getCompanyByLikeName(name);
         if(companyByLikeName.size() ==0){throw new CompanyNotFoundException("No company found with name "+ name) ;}
+        return ResponseEntity.status(HttpStatus.OK).body(companyByLikeName);
+    }
+    @GetMapping("/{name}")
+    public ResponseEntity<Company> getCompanyByName(@PathVariable String name) throws CompanyNotFoundException{
+        Company companyByLikeName = companyService.getCompanyByName(name);
+        if(companyByLikeName == null){throw new CompanyNotFoundException("No company found with name "+ name) ;}
         return ResponseEntity.status(HttpStatus.OK).body(companyByLikeName);
     }
     
     Logger logger = LoggerFactory.getLogger(this.getClass());
     //add methods
     @PostMapping("/addCompany")
-    public ResponseEntity<String> addCompany(@RequestBody Company company){
+    public ResponseEntity<Map<String, String>> addCompany(@RequestBody Company company){
         logger.info("ADD COMPANY -> {}", company);
-        return ResponseEntity.status(HttpStatus.OK).body(companyService.addCompany(company));
+        Map<String, String> map = new HashMap<>();
+        map.put("status", companyService.addCompany(company));
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
     @PostMapping("/updateCompany")
-    public ResponseEntity<String> updateCompany(@RequestBody Company company){
-        return ResponseEntity.status(HttpStatus.OK).body(companyService.updateCompany(company));
+    public ResponseEntity<Map<String, String>> updateCompany(@RequestBody Company company){
+        Map<String, String> map = new HashMap<>();
+        map.put("status", companyService.updateCompany(company));
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
     @GetMapping("/remove/{name}")

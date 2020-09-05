@@ -1,0 +1,100 @@
+<app-admin-navbar></app-admin-navbar>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <!-- <a routerLink ="/" class="nav-brand mr-4"> Company Services </a> -->
+  <!-- <button class="navbar-toggler" type ="button" data-toggle ="collapase" data-target="#navContent"
+  aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation" >
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+
+  <div id ="navContent"class ="mx-auto">
+    <ul class="navbar-nav  ">
+      <li class="nav-item mr-5">
+        <button class="nav-link btn btn-outline-primary" (click) = "onAdd()" >Add New Company</button>
+      </li>
+      <li class="nav-item ml-5">
+        <input type = "text" placeholder="Search" [(ngModel)] ="companyName" class="form-control" (keyup) ="onChange()">
+        <!-- <option class="list-group-item"> {{companyName}}</option> -->
+        <ul class="list-group">
+          <li *ngFor="let company of companyNameList" class="list-group-item" >
+            <button class = "btn" (click)="getCompany(company.companyName)" >{{company.companyName}}</button>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item ml-2 mr-5">
+        <button class="btn btn-outline-success " type="submit">Search</button>
+      </li>
+      <li class="nav-item ml-5">
+        <button class="btn btn-outline-success " type="submit" (click) ="getAll()">All Companies</button>
+      </li>
+  </ul>
+  </div>
+</nav>
+
+<!-- Add company -->
+<div *ngIf ="showAddCompany" class="container my-3">
+  <div class="text-center"><h2> Add Company</h2></div>
+  <form>
+    <div class="form-group">
+      <label for="companyName">Company Name</label>
+      <input id="my-input" class="form-control" type="text" name="companyName" [(ngModel)] ="company.companyName">
+    </div>
+    <div class="form-group">
+      <label >Company Details</label>
+      <input  class="form-control" type="text" name="companyDetails"[(ngModel)] ="company.companyDetails">
+    </div>
+    <div class="form-group">
+      <label>Turnover</label>
+      <input  class="form-control" type="text" name="turnover"[(ngModel)] ="company.turnover">
+    </div>
+    <div class="form-group">
+      <label >Sector</label>
+      <input  class="form-control" type="text" name="sector"[(ngModel)] ="company.sectorName">
+    </div>
+    <button class="btn btn-success btn-block" (click) ="addCompany()"> Add Company </button>
+  </form>
+</div>
+
+<div *ngIf ="companyRegistered" class="container text-center"
+  style="color:green; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+   <h3> {{message}}</h3>
+</div>
+
+<!-- serched companies -->
+<div *ngIf ="showSearched">
+  <div class="card" *ngFor="let company of companyList">
+    <div class="card-body">
+      <table class="table ">
+        <thead class="bg-dark text-light">
+          <tr>
+            <td>Company Name</td>
+            <td>Turnover</td>
+            <td>Details</td>
+            <td>Sector</td>
+            <td>IPO</td>
+          </tr>
+        </thead>
+        <tbody >
+          <tr >
+            <td> {{company.companyName}}<button class="btn btn-warning mx-2" (click)="onEdit('Company Name')"><i class="fa fa-pencil"></i></button></td>
+            <td> {{company.turnover}}<button class="btn btn-warning mx-2" (click)="onEdit('Turnover')"><i class="fa fa-pencil"></i></button></td>
+            <td> {{company.companyDetails}}<button class="btn btn-warning mx-2" (click)="onEdit('Company Details')"><i class="fa fa-pencil"></i></button></td>
+            <td> {{company.sectorName}}<button class="btn btn-warning mx-2" (click)="onEdit('Sector Name')"><i class="fa fa-pencil"></i></button></td>
+            <td><button class="btn btn-info" >IPO</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div class=" container row" [hidden]="!showEditBox">
+        <input type = "text"  placeholder="{{this.placeholder}}"
+        class="form-control col-md-11" [(ngModel)]="this.editProperty">
+        <button class="btn btn-outline-warning col-md-1" (click)="updateCompany(company)">Update</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+

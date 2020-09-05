@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark text-light ">
+  <a routerLink ="/" class="nav-brand mr-4"> StockExchange Management: Admin </a>
+  <button class="navbar-toggler" type ="button" data-toggle ="collapase" data-target="#navContent"
+  aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation" >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id ="navContent">
+    <ul class="navbar-nav ml-auto ">
+      <li class="nav-item">
+        <a routerLink ="/company" class="nav-link">Manage Companies</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink ="/stockExchange" class="nav-link">Manage StockExchanges</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink ="/uploadService" class="nav-link">Import Stocks</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink ="/sector" class="nav-link">Manage Sector</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink ="/sector" class="nav-link" (click) = "onLogout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+

@@ -35,11 +35,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void createNewUser(UserRequestModel userRequestModel) {
+	public String createNewUser(UserRequestModel userRequestModel) {
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		logger.info("userRequestModel -> {} ", userRequestModel);
-		userRequestModel.setRole("user");
-		userRepository.save(mapper.map(userRequestModel, User.class));
+		User user = userRepository.findUserByUserIdIgnoreCase(userRequestModel.getUserId());
+		if(user!=null){
+			return "failed";
+		}else{
+			if(userRequestModel.getRole() ==null){userRequestModel.setRole("user");}		
+			userRepository.save(mapper.map(userRequestModel, User.class));
+			return "successful";
+		}
 	}
 
 	@Override
@@ -84,5 +90,20 @@ public class UserServiceImpl implements UserService {
 			header.setToken("");
 			return header;			
 		}	
+	}
+
+	@Override
+	public String removeUser(String userId)  throws UserNotFoundException{
+		User user = userRepository.findUserByUserIdIgnoreCase(userId);
+
+		if(user ==null){throw new UserNotFoundException("No user with userId "+ userId);}
+		userRepository.delete(user);
+		return "Removed user with userId "+ userId;
+	}
+
+	@Override
+	public String removeAll() {
+		userRepository.deleteAll();
+		return "Removed all users";
 	}
 }
