@@ -20,17 +20,24 @@
         </tbody>
       </table>
       <hr>
-      <div>
+      <div class="container">
         <div class="row">
             <button class="btn btn-outline-primary col-sm" (click)="onShowIpo()"> IPO</button>
-            <button class="btn btn-outline-primary col-sm"> STOCKS</button>
-            <button class="btn btn-outline-primary col-sm"> COMPANY</button>
+            <button class="btn btn-outline-primary col-sm" (click)="onShowStocks()"> STOCKS</button>
+            <button class="btn btn-outline-primary col-sm" (click)="onShowRegisteredCompany()"> COMPANY</button>
         </div>
-      </div>
-      
-      <div class ="container mt-3" *ngIf="showIpo">
-        <app-ipo [stockCode]="stockEx.code" ></app-ipo>
+
+
+        <div class ="container mt-3" *ngIf="showIpo">
+          <app-ipo [stockCode]="stockEx.code" ></app-ipo>
+        </div>
+        <div class ="container mt-3" *ngIf="showStock">
+          <app-show-stocks [stockCode]="stockEx.code" ></app-show-stocks>
+        </div>
+        <div class ="container mt-3" *ngIf="showCompany">
+          <app-show-registered-company [STOCKCODE]="stockEx.code" ></app-show-registered-company>
+        </div>
       </div>
     </div>
   </div>
-  
+

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.piyush.companyservice.Entities.Company;
+import com.piyush.companyservice.Entities.CompanyStockCodes;
 import com.piyush.companyservice.Entities.StockPrices;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
 import com.piyush.companyservice.Exceptions.RegistrationError;
@@ -58,9 +59,15 @@ public class StocksServiceImpl implements StocksService {
     }
 
     @Override
-    public String addStock(StockPrices sp) {
-        stockPriceRepository.save(sp); 
-        return "Added new Stock for "+ sp.getCompanyCode() + " in StockExchange "+ sp.getStockCode();
+    public String addStock(StockPrices sp, String name) {
+        CompanyStockCodes codes = codesRepository.findCompanyCodeByCompanyNameIgnoreCaseAndStockCodeIgnoreCase(
+                            companyRepository.findByCompanyNameIgnoreCase(name).getCompanyName(), sp.getStockCode());
+       
+        if(codes==null){
+            codesRepository.save(new CompanyStockCodes(name, sp.getStockCode(),sp.getCompanyCode()));
+        }  
+        stockPriceRepository.save(sp);      
+        return "successful";
     }
 
     @Override

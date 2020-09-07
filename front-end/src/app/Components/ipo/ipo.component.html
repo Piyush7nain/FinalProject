@@ -24,7 +24,7 @@
       </tbody>
     </table>
     <hr>
-    <button class="btn btn-success btn-block" *ngIf="this.stockCode ==null" (click)="this.showIpoForm=!this.showIpoForm"> Add New Ipo</button>
+    <button class="btn btn-success btn-block" *ngIf="this.stockCode==null" (click)="this.showIpoForm=!this.showIpoForm"> Add New Ipo</button>
     <div *ngIf ="showIpoForm">
       <form>
         <div class="form-group">
@@ -52,6 +52,5 @@
       </form>
       <button class="btn btn-success btn-block" (click)="addIpo()"> Add </button>
     </div>
-
   </div>
 </div>

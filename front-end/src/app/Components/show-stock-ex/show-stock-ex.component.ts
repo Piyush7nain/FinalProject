@@ -26,6 +26,16 @@ export class ShowStockExComponent implements OnInit {
     this.showCompany=false;
     this.showStock =false;
   }
+  onShowStocks(){
+    this.showIpo = false;
+    this.showCompany=false;
+    this.showStock =!this.showStock;
+  }
+  onShowRegisteredCompany(){
+    this.showIpo = false;
+    this.showCompany=!this.showCompany;
+    this.showStock =false;
+  }
 
 
 }

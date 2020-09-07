@@ -29,4 +29,8 @@ export class ApiServiceService {
     return headers;
   }
 
+  postFiles( url:string,formData: FormData):Observable<any>{
+    return this.http.post(this.baseUrl +url, formData)
+  }
+
 }

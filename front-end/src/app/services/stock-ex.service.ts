@@ -27,4 +27,23 @@ export class StockExService {
     })
     return status;
   }
+
+  getAllRegisteredCompany(code:string):Observable<any>{
+    let list:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    this.apiService.get(this.baseUrl + code + "/companies").subscribe(data=>{
+      console.log(data)
+      list.next(data);
+    })
+    return list;
+  }
+
+  registerCompany(obj:any){
+    let status:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    this.apiService.post(this.baseUrl +"/registerCompany", obj).subscribe(data =>{
+      console.log(data);
+      status.next(data)
+    })
+    return status;
+  }
+
 }

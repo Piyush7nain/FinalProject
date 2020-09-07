@@ -71,9 +71,9 @@ public class ExchangeServiceImpl implements ExchangeService {
 
         if(codes.size() == 0){
             codesRepository.save(csc);
-            return "Added " + csc.getcompanyName() + " to " + exchangeRepository.findByCodeIgnoreCase(csc.getStockCode()).get().getStockExName();
+            return "successful";
         }else{
-            return csc.getcompanyName() + " already registered with " + exchangeRepository.findByCodeIgnoreCase(csc.getStockCode()).get().getStockExName();
+            return "failed";
         }
     }
 

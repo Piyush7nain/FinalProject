@@ -2,9 +2,6 @@ package com.piyush.uploadservice.Dto;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 public class SummaryDto {
 
     private String companyCode;
@@ -13,10 +10,14 @@ public class SummaryDto {
 
     private int numOfRecords;
 
-    @DateTimeFormat(iso = ISO.DATE)
+    private String status;
+
+    private String message;
+
+    //@DateTimeFormat(iso = ISO.DATE)
     private Date startDate;
 
-    @DateTimeFormat(iso = ISO.DATE)
+    //@DateTimeFormat(iso = ISO.DATE)
     private Date endDate;
 
     public String getCompanyCode() {
@@ -74,6 +75,27 @@ public class SummaryDto {
     public String toString() {
         return "SummaryDto [StockExCode = "  + StockExCode + ", companyCode=" + companyCode 
                 + ", numOfRecords=" + numOfRecords + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+    }
+
+    public SummaryDto(String status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     

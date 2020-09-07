@@ -16,7 +16,7 @@ public interface StocksService {
 
 	List<StockPrices> getStockPricesByRange(Dates dates, String name) throws CompanyNotFoundException, RegistrationError;
 	
-	String addStock(StockPrices sp);
+	String addStock(StockPrices sp, String name);
 
 	List<StockPrices> getAllStocks();
 

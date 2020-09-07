@@ -55,9 +55,12 @@ public class ExchangeController {
     }
 
     
-    @PostMapping("/addCompany")
-    public ResponseEntity<String> addCompanyToExchange(@RequestBody CompanyStockCodes csc){
-        return ResponseEntity.status(HttpStatus.OK).body(exchangeService.addCompanyToExchange(csc));
+    @PostMapping("/registerCompany")
+    public ResponseEntity<Map<String, String>> addCompanyToExchange(@RequestBody CompanyStockCodes csc){
+        String status = exchangeService.addCompanyToExchange(csc);
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status);
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
     @GetMapping("/{id}/companies")

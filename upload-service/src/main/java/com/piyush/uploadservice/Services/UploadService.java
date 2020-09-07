@@ -1,10 +1,6 @@
 package com.piyush.uploadservice.Services;
 
-import java.util.Comparator;
-import java.util.List;
-
 import com.piyush.uploadservice.Dto.SummaryDto;
-import com.piyush.uploadservice.Entities.StockPrices;
 import com.piyush.uploadservice.ExcelHelper.ExcelHelper;
 import com.piyush.uploadservice.Repo.StockRepository;
 
@@ -22,53 +18,36 @@ public class UploadService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-   
-
     public SummaryDto uploadExcel(MultipartFile file) throws Exception {
         //check for excel and generate inputStream
         String fileName = file.getOriginalFilename();
 		String fileType = fileName.substring(fileName.lastIndexOf("."));
 
         if(fileType ==null || fileType.equals(".xls")||fileType.equals(".csv")){
-            throw new Exception("Invalid Excel Format");
+            //throw new Exception("Invalid Excel Format");
+            return new SummaryDto("failed","Incorrect file format");
         }
+        logger.info("stockRepository in service -> {}", stockRepository);
+        ExcelHelper excelHelper = new ExcelHelper(stockRepository);
+        return excelHelper.uploadExcel(file.getInputStream());
 
-        List<StockPrices> stockList = ExcelHelper.uploadExcel(file.getInputStream());
-
-        logger.info("extracted data from excel");
-        
-        stockRepository.saveAll(stockList);
-       /*  for (StockPrices stockPrices : stockList) {
-            client.addStock(stockPrices);            
+        /* if(stockList.size()>0){
+            stockRepository.saveAll(stockList);
+            logger.info("Added all the stocks to Database");
+            
+            SummaryDto summary = this.getSummary(stockList);
+            logger.info("Summary -> {}", summary);
+            return summary;
+        }else{
+            SummaryDto summary = new SummaryDto("failed", "StockCode in File does not match the StockCode passed");
         } */
-        logger.info("Added all the stocks to Database");
-        
-        SummaryDto summary = this.getSummary(stockList);
-        logger.info("Summary -> {}", summary);
-        return summary;
 
     }
 
-    private SummaryDto getSummary(List<StockPrices> stockList) {
-        SummaryDto summaryDto = new SummaryDto();
+    
 
-        if (stockList.size() != 0) 
-			{
-	            summaryDto.setNumOfRecords(stockList.size());
-	            summaryDto.setCompanyCode(stockList.get(0).getCompanyCode());
-	            summaryDto.setStockExCode(stockList.get(0).getStockCode());
-	            
-	            stockList.sort(Comparator.comparing(StockPrices::getDate));
-	            
-	            summaryDto.setStartDate(stockList.get(0).getDate());
-	            summaryDto.setEndDate(stockList.get(stockList.size()-1).getDate());
-            }
-            logger.info("prepared summary");    
-        return summaryDto ;
-    }
-
-	public List<StockPrices> getAllStocks() {
-		return stockRepository.findAll();
-	}
+	// public List<StockPrices> getAllStocks() {
+	// 	return stockRepository.findAll();
+	// }
 
 }

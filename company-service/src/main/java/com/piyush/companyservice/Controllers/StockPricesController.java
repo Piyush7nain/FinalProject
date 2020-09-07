@@ -1,6 +1,8 @@
 package com.piyush.companyservice.Controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.piyush.companyservice.Entities.StockPrices;
 import com.piyush.companyservice.Exceptions.CompanyNotFoundException;
@@ -72,9 +74,12 @@ public class StockPricesController {
         return ResponseEntity.status(HttpStatus.OK).body(stockPricesByRange);
     }
 
-    @PostMapping("/add")
-    public String addStock(@RequestBody StockPrices sp){
-        return stocksService.addStock(sp);
+    @PostMapping("/add/{name}")
+    public ResponseEntity<Map<String, String>> addStock(@RequestBody StockPrices sp, @PathVariable String name){
+        String status = stocksService.addStock(sp, name);
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status);    
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
     @GetMapping("/remove/{id}")

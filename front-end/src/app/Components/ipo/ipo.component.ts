@@ -39,6 +39,9 @@ export class IpoComponent implements OnInit {
         this.ipos= data;
       })
     } else if(this.stockCode  != null){
+        this.stockExService.getAllExchanges().subscribe(data =>{
+          this.stockExs = data.filter(exs => exs.code == this.stockCode)
+        } )
         this.ipoService.getAllIpoByStockCode(this.stockCode).subscribe(data=>{
           this.ipos= data;
         })
@@ -46,13 +49,12 @@ export class IpoComponent implements OnInit {
 
   }
 
-
   removeIpo(removeIpo:Ipo){
     let id = removeIpo.id;
     this.ipoService.removeIpo(id);
     this.ipos = this.ipos.filter((ipo)=>ipo.id !== removeIpo.id);
   }
-  
+
   addIpo(){
     let name:string= this.companyName
     this.showIpoForm = false;

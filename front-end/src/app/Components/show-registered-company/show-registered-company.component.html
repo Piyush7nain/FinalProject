@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-body">
+    <table class="table ">
+      <thead class="bg-dark text-light">
+        <tr>
+          <td>Company Name</td>
+          <td>Company Code</td>
+          <td>Stock Code</td>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let company of registeredCompanies">
+          <td> {{company.companyName}}</td>
+          <td> {{company.companyCode}}</td>
+          <td> {{company.stockCode}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <div class="container">
+        <button class="btn btn-success btn-block" (click)="onRegisterCompany()"> Register New Company  </button>
+    </div>
+    <div *ngIf ="showAddForm">
+      <form>
+        <div class="form-group">
+          <label>Company Name</label>
+          <small id="emailHelp" class="form-text text-muted">Please add new company to Database if its name is not shown here</small>
+          <select class="form-control" type="text" name="CompanyName" [(ngModel)]="newCompany.companyName">
+            <option *ngFor="let company of this.allCompanies"> {{company.companyName}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Company Code</label>
+          <input class="form-control" type="text" name="companyCode" [(ngModel)]="newCompany.companyCode">
+        </div>
+        <div class="form-group">
+          <label>Stock Code</label>
+          <select class="form-control" type="text" name="stockCode" [(ngModel)]="newCompany.stockCode">
+            <option > {{this.STOCKCODE}}</option>
+          </select>
+        </div>
+      </form>
+      <button class="btn btn-success btn-block" (click)="registerCompany()"> Add </button>
+    </div>
+  </div>
+</div>

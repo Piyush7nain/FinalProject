@@ -1,9 +1,6 @@
 package com.piyush.uploadservice.Controllers;
 
-import java.util.List;
-
 import com.piyush.uploadservice.Dto.SummaryDto;
-import com.piyush.uploadservice.Entities.StockPrices;
 import com.piyush.uploadservice.Services.UploadService;
 
 import org.slf4j.Logger;
@@ -38,14 +35,14 @@ public class UpoloadController {
         return "hello";
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<StockPrices>> getAllStocks()  {
-        List<StockPrices> allStocks = uploadService.getAllStocks();
-        if (allStocks.size() == 0) {
-            //throw new StockNotFoundException("No Stocks listed anywhere");
-            return null;   
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(allStocks);
-    }
+    // @GetMapping("/all")
+    // public ResponseEntity<List<StockPrices>> getAllStocks()  {
+    //     List<StockPrices> allStocks = uploadService.getAllStocks();
+    //     if (allStocks.size() == 0) {
+    //         //throw new StockNotFoundException("No Stocks listed anywhere");
+    //         return null;   
+    //     }
+    //     return ResponseEntity.status(HttpStatus.OK).body(allStocks);
+    // }
     
 }

@@ -1,0 +1,57 @@
+<h3 style="margin-top:20px;">
+  Upload Excel
+</h3>
+<hr />
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="file">Select Excel File to upload</label>
+      <input class="form-control-file" type="file" name="file" id="file" />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <button type="button" class="btn btn-success btn-lg"  (click)="uploadExcel()">Upload</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <a  target="_blank" href="../../assets/excel/stock_prices.xlsx">Click here to download sample excel</a>
+  </div>
+</div>
+
+<div class="container text-center mt-3" *ngIf="showMessage">
+  <div class="alert alert-warning " role="alert">
+    {{uploadSummary.message}}
+  </div>
+</div>
+<div class="row" *ngIf="showSummary" style="margin-top: 20px ;">
+
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td>companyName:</td>
+        <td>{{uploadSummary.companyCode}}</td>
+      </tr>
+      <tr>
+        <td>stockExchange:</td>
+        <td>{{uploadSummary.stockExCode}}</td>
+      </tr>
+      <tr>
+        <td>recordNumber:</td>
+        <td>{{uploadSummary.numOfRecords}}</td>
+      </tr>
+      <tr>
+        <td>fromDate:</td>
+        <td>{{uploadSummary.startDate}}</td>
+      </tr>
+      <tr>
+        <td>toDate:</td>
+        <td>{{uploadSummary.endDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

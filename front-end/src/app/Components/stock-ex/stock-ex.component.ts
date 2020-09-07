@@ -18,6 +18,7 @@ export class StockExComponent implements OnInit {
   showAddForm:boolean = false;
   showStockExs:boolean=false;
   showMessage:boolean=false;
+  showUpload:boolean=false;
 
   ngOnInit(): void {
   }
@@ -27,6 +28,8 @@ export class StockExComponent implements OnInit {
     this.showStockExs = !this.showStockExs;
     this.stockExService.getAllExchanges().subscribe(data => this.stockExs = data);
   }
+
+
 
   onAdd(){
     this.showAddForm=!this.showAddForm;
@@ -44,7 +47,7 @@ export class StockExComponent implements OnInit {
     this.showAddForm= false;
     this.showMessage = true;
     this.stockExService.addStock(this.stockEx).subscribe(data=>{
-      if(data.status == 'successful'){ 
+      if(data.status == 'successful'){
         this.message = "Added New Stock Exchange to Database";
       }else if(data.status != 'successful') {
         this.message = "failed to add Stock Exchang to Database";
@@ -52,5 +55,10 @@ export class StockExComponent implements OnInit {
     })
   }
 
-  onUpload(){}
+  onUpload(){
+    this.showAddForm = false;
+    this.showMessage = false;
+    this.showStockExs = false;
+    this.showUpload = !this.showUpload;
+  }
 }
