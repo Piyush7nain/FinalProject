@@ -13,7 +13,15 @@ export class ShowCompanyComponent implements OnInit {
   @Input()
   company: Company;
 
+  @Input()
+  isAdmin:boolean=false;
+
   showEditBox:boolean=false;
+  showIpos:boolean=false;
+  showStocks:boolean=false;
+
+
+
   placeholder:string;
   editProperty:any;
   name:string;
@@ -50,8 +58,15 @@ export class ShowCompanyComponent implements OnInit {
 
   }
 
-  showIpo(company:Company){
-    this.company.showIpo = !this.company.showIpo;
+  showIpo(){
+    this.showEditBox=false
+    this.showStocks=false
+    this.showIpos = !this.showIpos;
+  }
+  showStock(){
+    this.showIpos = false;
+    this.showEditBox=false;
+    this.showStocks = !this.showStocks;
   }
 
 }

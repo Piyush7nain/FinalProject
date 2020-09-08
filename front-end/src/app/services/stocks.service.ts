@@ -18,6 +18,15 @@ export class StocksService {
     return list;
   }
 
+  getAllStocksByCompanyName(name:string):Observable<any>{
+    let list:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    this.apiService.get("company-service/stocks/company/"+name+"/all").subscribe(data=>{
+      console.log(data);
+      list.next(data)
+    })
+    return list;
+  }
+
   addOneStock(obj:any, name:string):Observable<any>{
     let status:BehaviorSubject<any> = new BehaviorSubject<any>([]);
     this.apiService.post("company-service/stocks/add/"+name, obj).subscribe(data =>{

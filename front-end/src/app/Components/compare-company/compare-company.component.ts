@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../../models/Company'
-import { CompanyServiceService } from 'src/app/services/company-service.service';
+import { CompanyServiceService } from '../../services/company-service.service';
 
 @Component({
-  selector: 'app-comparisons',
-  templateUrl: './comparisons.component.html',
-  styleUrls: ['./comparisons.component.css']
+  selector: 'app-compare-company',
+  templateUrl: './compare-company.component.html',
+  styleUrls: ['./compare-company.component.css']
 })
-export class ComparisonsComponent implements OnInit {
+export class CompareCompanyComponent implements OnInit {
 
   constructor(private companyService: CompanyServiceService) { }
 
   companyList:Company[];
   companyNameList:Company[];
-  company:Company = {
+  searchedCompany:Company = {
      companyName: '',
      companyDetails:'',
      sectorName: '',
@@ -27,6 +27,7 @@ export class ComparisonsComponent implements OnInit {
   showSearched:boolean = false;
   showEditBox:boolean = false;
   companyName:string = '';
+  isAdmin:boolean=false;
 
   ngOnInit(): void {
   }
@@ -34,7 +35,7 @@ export class ComparisonsComponent implements OnInit {
 
 
   onAdd(){
-    this.company ={
+    this.searchedCompany ={
       companyName: '',
       companyDetails:'',
       sectorName: '',
@@ -75,6 +76,5 @@ export class ComparisonsComponent implements OnInit {
       this.companyList = [data];
     })
   }
-
 
 }

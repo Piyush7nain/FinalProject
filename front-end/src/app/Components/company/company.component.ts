@@ -26,6 +26,7 @@ export class CompanyComponent implements OnInit {
   companyRegistered:boolean = false;
   showSearched:boolean = false;
   showEditBox:boolean = false;
+  isAdmin:boolean=true;
 
   ngOnInit(): void {
   }

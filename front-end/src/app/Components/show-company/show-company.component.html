@@ -9,15 +9,17 @@
           <td>Details</td>
           <td>Sector</td>
           <td>IPO</td>
+          <td>STOCKS</td>
         </tr>
       </thead>
       <tbody >
         <tr >
-          <td> {{company.companyName}}<button class="btn btn-warning mx-2" (click)="onEdit('Company Name')"><i class="fa fa-pencil"></i></button></td>
-          <td> {{company.turnover}}<button class="btn btn-warning mx-2" (click)="onEdit('Turnover')"><i class="fa fa-pencil"></i></button></td>
-          <td> {{company.companyDetails}}<button class="btn btn-warning mx-2" (click)="onEdit('Company Details')"><i class="fa fa-pencil"></i></button></td>
-          <td> {{company.sectorName}}<button class="btn btn-warning mx-2" (click)="onEdit('Sector Name')"><i class="fa fa-pencil"></i></button></td>
-          <td><button class="btn btn-info" (click)="showIpo(company)">IPO</button></td>
+          <td> {{company.companyName}}<button *ngIf="isAdmin" class="btn btn-warning mx-2" (click)="onEdit('Company Name')"><i class="fa fa-pencil"></i></button></td>
+          <td> {{company.turnover}}<button *ngIf="isAdmin" class="btn btn-warning mx-2" (click)="onEdit('Turnover')"><i class="fa fa-pencil"></i></button></td>
+          <td> {{company.companyDetails}}<button *ngIf="isAdmin" class="btn btn-warning mx-2" (click)="onEdit('Company Details')"><i class="fa fa-pencil"></i></button></td>
+          <td> {{company.sectorName}}<button *ngIf="isAdmin" class="btn btn-warning mx-2" (click)="onEdit('Sector Name')"><i class="fa fa-pencil"></i></button></td>
+          <td><button class="btn btn-info" (click)="showIpo()">IPO</button></td>
+          <td><button class="btn btn-info" (click)="showStock()">STOCKS</button></td>
         </tr>
       </tbody>
     </table>
@@ -27,8 +29,11 @@
       class="form-control col-md-11" [(ngModel)]="this.editProperty">
       <button class="btn btn-outline-warning col-md-1" (click)="updateCompany(company)">Update</button>
     </div>
-    <div class ="container" *ngIf="company.showIpo">
-      <app-ipo [companyName]="company.companyName" ></app-ipo>
+    <div class ="container" *ngIf="showIpos">
+      <app-ipo [where]="'company'" [companyName]="this.company.companyName" [isAdmin]="this.isAdmin" ></app-ipo>
+    </div>
+    <div class ="container" *ngIf="showStocks">
+      <app-show-stocks [where]="'company'" [companyName]="this.company.companyName" [isAdmin]="this.isAdmin" ></app-show-stocks>
     </div>
   </div>
 </div>

@@ -24,41 +24,41 @@
     <hr>
     <div class="container">
       <div class="row">
-        <button class="btn btn-outline-success btn-block" (click)= "onAddOneStock()">Add One Stock</button>
+        <button class="btn btn-outline-success btn-block" *ngIf="isAdmin" (click)= "onAddOneStock()">Add One Stock</button>
       </div>
     </div>
     <div *ngIf ="showAddForm">
-      <form>
+      <form #stockForm="ngForm">
         <div class="form-group">
           <label>Company Name</label>
-          <select class="form-control" type="text" name="CompanyName" [(ngModel)]="addCompanyName">
+          <select required  class="form-control" type="text" name="CompanyName" [(ngModel)]="addCompanyName">
             <option *ngFor="let company of this.registeredCompanies"> {{company.companyName}}</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Company Code</label>
-          <input class="form-control" type="text" name="companyCode" [(ngModel)]="newStock.companyCode">
-        </div>
-        <div class="form-group">
           <label>Stock Code</label>
-          <select class="form-control" type="text" name="stockCode" [(ngModel)]="newStock.stockCode">
-            <option > {{this.stockCode}}</option>
+          <select required class="form-control" type="text" name="stockCode" [(ngModel)]="newStock.stockCode">
+            <option *ngFor="let stockEx of stockExs"> {{stockEx.code}}</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Price Per Share</label>
-          <input class="form-control" type="text" name="pricePerShare" [(ngModel)]="newStock.currentPrice">
+          <label>Company Code</label>
+          <input required class="form-control" type="text" name="companyCode" [(ngModel)]="newStock.companyCode">
+        </div>
+        <div class="form-group">
+          <label>Current Share</label>
+          <input required class="form-control" type="text" name="pricePerShare" [(ngModel)]="newStock.currentPrice">
         </div>
         <div class="form-group">
           <label>Date</label>
-          <input class="form-control" placeholder ='YYYY-MM-dd' type="text" name="date" [(ngModel)]="newStock.date">
+          <input required class="form-control" placeholder ='YYYY-MM-dd' type="text" name="date" [(ngModel)]="newStock.date">
         </div>
         <div class="form-group">
           <label>Time</label>
-          <input class="form-control" type="text"  placeholder="HH:mm:ss" name="time" [(ngModel)]="newStock.time">
+          <input required class="form-control" type="text"  placeholder="HH:mm:ss" name="time" [(ngModel)]="newStock.time">
         </div>
       </form>
-      <button class="btn btn-success btn-block" (click)="addOneStock()"> Add </button>
+      <button class="btn btn-success btn-block" [disabled]="stockForm.form.invalid" (click)="addOneStock()"> Add </button>
     </div>
   </div>
 </div>

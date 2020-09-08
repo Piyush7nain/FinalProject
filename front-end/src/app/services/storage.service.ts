@@ -12,6 +12,7 @@ export class StorageService {
 
   // Store userinfo from session storage
   storeUserInfo(user: any ) {
+    this.removeUserInfo();
     let userInfoString:string = JSON.stringify(user);
     this.storage.setItem(this.currentUserKey, userInfoString);
   }

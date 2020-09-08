@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
-import { UserUpdateModel } from '../../models/UserUpdateModel'
-import { TitleCasePipe } from '@angular/common';
+import { UserUpdateModel } from '../../models/UserUpdateModel';
 
 @Component({
-  selector: 'app-user-page',
-  templateUrl: './user-page.component.html',
-  styleUrls: ['./user-page.component.css']
+  selector: 'app-user-landing',
+  templateUrl: './user-landing.component.html',
+  styleUrls: ['./user-landing.component.css']
 })
-export class UserPageComponent implements OnInit {
+export class UserLandingComponent implements OnInit {
 
   constructor(private storageService: StorageService,
     private userService: UserService) { }
@@ -53,7 +52,6 @@ export class UserPageComponent implements OnInit {
       }
     })
   }
-
 
 
 }

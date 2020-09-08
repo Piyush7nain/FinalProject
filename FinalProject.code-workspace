@@ -24,12 +24,6 @@
 		{
 			"name": "zuul-gateway",
 			"path": "zuul-gateway"
-		},
-		{
-			"path": "front-end"
-		},
-		{
-			"path": "..\\users-navbar"
 		}
 	],
 	"settings": {

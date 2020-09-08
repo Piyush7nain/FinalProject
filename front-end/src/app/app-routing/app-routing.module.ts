@@ -6,9 +6,8 @@ import { SignupComponent } from '../components/signup/signup.component';
 import { AdminPageComponent } from '../components/admin-page/admin-page.component';
 import { CompanyComponent } from '../components/company/company.component';
 import { StockExComponent } from '../components/stock-ex/stock-ex.component';
-import { UserPageComponent } from '../Components/user-page/user-page.component';
-import { ComparisonsComponent } from '../Components/comparisons/comparisons.component';
-
+import { UserLandingComponent } from '../components/user-landing/user-landing.component';
+import { CompareCompanyComponent } from '../components/compare-company/compare-company.component'
 
 const routes: Routes =[
   {path: '', component:LoginComponent},
@@ -17,8 +16,8 @@ const routes: Routes =[
   {path:'admin-page', component:AdminPageComponent},
   {path:'company',component:CompanyComponent},
   {path:'stockEx', component:StockExComponent},
-  {path:'user-page', component:UserPageComponent},
-  {path:'comparisons', component:ComparisonsComponent}
+  {path:'user-landing', component:UserLandingComponent},
+  {path:'compare-company', component:CompareCompanyComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

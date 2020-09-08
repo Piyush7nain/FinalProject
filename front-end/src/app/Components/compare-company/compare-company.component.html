@@ -28,3 +28,9 @@
   </div>
 </nav>
 
+<div *ngIf="showSearched">
+  <div *ngFor="let oneCompany of companyList">
+    <app-show-company [company]="oneCompany" [isAdmin]="this.isAdmin" ></app-show-company>
+  </div>
+</div>
+

@@ -21,17 +21,16 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { CompanyComponent } from './components/company/company.component';
 import { IpoComponent } from './components/ipo/ipo.component';
-import { ShowCompanyComponent } from './components/show-company/show-company.component';
 import { StockExComponent } from './components/stock-ex/stock-ex.component';
 import { ShowStockExComponent } from './components/show-stock-ex/show-stock-ex.component';
 import { ShowStocksComponent } from './components/show-stocks/show-stocks.component';
 import { ShowRegisteredCompanyComponent } from './components/show-registered-company/show-registered-company.component';
 import { UploadExcelComponent } from './components/upload-excel/upload-excel.component';
 import { UploadStocksComponent } from './components/upload-stocks/upload-stocks.component';
-import { UserPageComponent } from './Components/user-page/user-page.component';
-import { UserNavbarComponent } from './Components/user-navbar/user-navbar.component';
-import { ComparisonsComponent } from './Components/comparisons/comparisons.component';
-
+import { ShowCompanyComponent } from './components/show-company/show-company.component';
+import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
+import { UserLandingComponent } from './components/user-landing/user-landing.component';
+import { CompareCompanyComponent } from './components/compare-company/compare-company.component';
 
 
 @NgModule({
@@ -43,17 +42,16 @@ import { ComparisonsComponent } from './Components/comparisons/comparisons.compo
     AdminNavbarComponent,
     CompanyComponent,
     IpoComponent,
-    ShowCompanyComponent,
     StockExComponent,
     ShowStockExComponent,
     ShowStocksComponent,
     ShowRegisteredCompanyComponent,
     UploadExcelComponent,
     UploadStocksComponent,
-    UserPageComponent,
+    ShowCompanyComponent,
     UserNavbarComponent,
-    ComparisonsComponent,
-
+    UserLandingComponent,
+    CompareCompanyComponent
   ],
   imports: [
     BrowserModule,

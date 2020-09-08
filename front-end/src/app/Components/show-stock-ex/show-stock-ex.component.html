@@ -29,10 +29,10 @@
 
 
         <div class ="container mt-3" *ngIf="showIpo">
-          <app-ipo [stockCode]="stockEx.code" ></app-ipo>
+          <app-ipo [where]="'stockEx'" [isAdmin]=true [stockCode]="stockEx.code" ></app-ipo>
         </div>
         <div class ="container mt-3" *ngIf="showStock">
-          <app-show-stocks [stockCode]="stockEx.code" ></app-show-stocks>
+          <app-show-stocks [isAdmin]=true [stockCode]="stockEx.code" [where]="'stockEx'" ></app-show-stocks>
         </div>
         <div class ="container mt-3" *ngIf="showCompany">
           <app-show-registered-company [STOCKCODE]="stockEx.code" ></app-show-registered-company>

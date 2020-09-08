@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       }
       if(data.status == "successful" && data.role =="user"){
         this.storageService.storeUserInfo(data);
-        this.router.navigate(['user-page'])
+        this.router.navigate(['user-landing'])
       }
       if(data.status == "failed" ){
         this.router.navigate(['login']);

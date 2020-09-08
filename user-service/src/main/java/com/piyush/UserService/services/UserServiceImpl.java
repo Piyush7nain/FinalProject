@@ -81,6 +81,7 @@ public class UserServiceImpl implements UserService {
 	public Header authenticateUser(UserAuthenticate userRequest)  {
 		
 		Header header = new Header();	
+		logger.info("User Authenticate -> {}", userRequest);
 		User user = userRepository.findByUserIdIgnoreCaseAndPassword(userRequest.getUserId(), userRequest.getPassword());	
 		if(user == null){
 			header.setStatus("failed");
@@ -113,16 +114,19 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public String updateUser(UserUpdateModel userUpdateModel, String userId) {
 		User user = userRepository.findByUserIdIgnoreCaseAndPassword(userId, userUpdateModel.getOldPassword());
+		
+
 		if(user == null){
 			return "failed";	
 		}else{
-			if(userUpdateModel.getNewPassword()!=null){
+			if(userUpdateModel.getNewPassword().length()>0){
 				user.setPassword(userUpdateModel.getNewPassword());
+				logger.info("new password accepted -> {}", userUpdateModel.getNewPassword());
 			}
-			user.setEmail(userUpdateModel.getEmail()!=null? userUpdateModel.getEmail():user.getEmail());
-			user.setFirstName(userUpdateModel.getFirstName()!=null? userUpdateModel.getFirstName():user.getFirstName());
-			user.setLastName(userUpdateModel.getLastName()!=null? userUpdateModel.getLastName():user.getLastName());
-			user.setUserId(userUpdateModel.getUserId()!=null? userUpdateModel.getUserId():user.getUserId());
+			user.setEmail(userUpdateModel.getEmail().length()>0? userUpdateModel.getEmail():user.getEmail());
+			user.setFirstName(userUpdateModel.getFirstName().length()>0? userUpdateModel.getFirstName():user.getFirstName());
+			user.setLastName(userUpdateModel.getLastName().length()>0? userUpdateModel.getLastName():user.getLastName());
+			user.setUserId(userUpdateModel.getUserId().length()>0? userUpdateModel.getUserId():user.getUserId());
 			logger.info("updated user -> {}",user);
 			return "successful";
 		}

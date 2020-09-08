@@ -1,8 +1,8 @@
 <app-admin-navbar></app-admin-navbar>
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <a class="navbar-brand" routerLink="/">Company Services</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" 
-    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -34,24 +34,24 @@
 <!-- Add company -->
 <div *ngIf ="showAddCompany" class="container my-3">
   <div class="text-center"><h2> Add Company</h2></div>
-  <form>
+  <form #companyForm="ngForm">
     <div class="form-group">
       <label for="companyName">Company Name</label>
-      <input id="my-input" class="form-control" type="text" name="companyName" [(ngModel)] ="company.companyName">
+      <input required id="my-input" class="form-control" type="text" name="companyName" [(ngModel)] ="company.companyName">
     </div>
     <div class="form-group">
       <label >Company Details</label>
-      <input  class="form-control" type="text" name="companyDetails"[(ngModel)] ="company.companyDetails">
+      <input class="form-control" type="text" name="companyDetails"[(ngModel)] ="company.companyDetails">
     </div>
     <div class="form-group">
       <label>Turnover</label>
-      <input  class="form-control" type="text" name="turnover"[(ngModel)] ="company.turnover">
+      <input required class="form-control" type="text" name="turnover"[(ngModel)] ="company.turnover">
     </div>
     <div class="form-group">
       <label >Sector</label>
-      <input  class="form-control" type="text" name="sector"[(ngModel)] ="company.sectorName">
+      <input required class="form-control" type="text" name="sector"[(ngModel)] ="company.sectorName">
     </div>
-    <button class="btn btn-success btn-block" (click) ="addCompany()"> Add Company </button>
+    <button class="btn btn-success btn-block" [disabled]="companyForm.form.invalid"(click) ="addCompany()"> Add Company </button>
   </form>
 </div>
 
@@ -63,7 +63,7 @@
 <!-- serched companies -->
 <div *ngIf ="showSearched">
   <div *ngFor="let company of companyList">
-    <app-show-company [company] = "company"></app-show-company>
+    <app-show-company [company] = "company" [isAdmin]="this.isAdmin"></app-show-company>
   </div>
 </div>
 
