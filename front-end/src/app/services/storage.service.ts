@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { UserAuthentication } from '../models/UserAuthentication';
+import { User } from '../models/User'
 
-
-
-@Injectable()
-export class UserInfoService {
-
+@Injectable({
+  providedIn: 'root'
+})
+export class StorageService {
   public currentUserKey = 'currentUser';
   public storage: Storage = sessionStorage;
 
   constructor() { }
 
   // Store userinfo from session storage
-  storeUserInfo(userInfoString: string) {
+  storeUserInfo(user: any ) {
+    let userInfoString:string = JSON.stringify(user);
     this.storage.setItem(this.currentUserKey, userInfoString);
   }
 
@@ -21,12 +21,19 @@ export class UserInfoService {
     this.storage.removeItem(this.currentUserKey);
   }
 
+  updateUserInfo(userId:string){
+    let userInfo = this.getUserInfo()
+    userInfo.userId =userId;
+    this.removeUserInfo();
+    this.storeUserInfo(userInfo);
+  }
+
   // Get userinfo from session storage
-  getUserInfo(): UserAuthentication | null {
+  getUserInfo(): any | null {
     try {
       const userInfoString: string = this.storage.getItem(this.currentUserKey);
       if (userInfoString) {
-        const userObj: UserAuthentication = JSON.parse(this.storage.getItem(this.currentUserKey));
+        const userObj: any = JSON.parse(this.storage.getItem(this.currentUserKey));
         return userObj;
       } else {
         return null;
@@ -38,14 +45,6 @@ export class UserInfoService {
 
   isLoggedIn(): boolean {
     return this.storage.getItem(this.currentUserKey) ? true : false;
-  }
-
-  getStoredToken(): string | null {
-    const userObj: UserAuthentication = this.getUserInfo();
-    if (userObj !== null) {
-      return userObj.token;
-    }
-    return null;
   }
 
 }

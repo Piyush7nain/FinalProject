@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Company } from 'src/app/models/Company';
-import { CompanyServiceService } from 'src/app/services/company-service.service';
+import { Company } from '../../models/Company';
+import { CompanyServiceService } from '../../services/company-service.service';
 
 @Component({
   selector: 'app-show-company',
@@ -33,15 +33,15 @@ export class ShowCompanyComponent implements OnInit {
       case "Company Name":
         company.companyName = this.editProperty;
         break;
-    case "Turnover":
-      company.turnover = Number(this.editProperty);
-      break;
-    case "Company Details":
-      company.companyDetails = this.editProperty;
-      break;
-    case "Sector Name":
-      company.sectorName = this.editProperty;
-      break;
+      case "Turnover":
+        company.turnover = Number(this.editProperty);
+        break;
+      case "Company Details":
+        company.companyDetails = this.editProperty;
+        break;
+      case "Sector Name":
+        company.sectorName = this.editProperty;
+        break;
     }
     this.placeholder =null;
     this.showEditBox =false;

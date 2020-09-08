@@ -8,6 +8,7 @@ import com.piyush.UserService.shared.Header;
 import com.piyush.UserService.shared.UserAuthenticate;
 import com.piyush.UserService.shared.UserRequestModel;
 import com.piyush.UserService.shared.UserResponseModel;
+import com.piyush.UserService.shared.UserUpdateModel;
 
 public interface UserService {
 
@@ -23,4 +24,6 @@ public interface UserService {
 	public String removeUser(String userId) throws UserNotFoundException;
 
 	public String removeAll();
+
+	public String updateUser(UserUpdateModel userUpdateModel, String userId);
 }

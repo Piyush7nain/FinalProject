@@ -5,12 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ApiServiceService } from '../app/services/api-service.service';
 import { LoginServiceService } from '../app/services/login-service.service';
-import { UserInfoService } from '../app/services/user-info.service';
 import { CompanyServiceService } from '../app/services/company-service.service';
 import { IpoService } from '../app/services/ipo.service';
 import { StockExService } from '../app/services/stock-ex.service';
 import { StocksService } from '../app/services/stocks.service';
-import { UploadExcelService } from '../app/services/upload-excel.service'
+import { UploadExcelService } from '../app/services/upload-excel.service';
+import { StorageService } from  '../app/services/storage.service';
+import { UserService } from '../app/services/user.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,6 +28,10 @@ import { ShowStocksComponent } from './components/show-stocks/show-stocks.compon
 import { ShowRegisteredCompanyComponent } from './components/show-registered-company/show-registered-company.component';
 import { UploadExcelComponent } from './components/upload-excel/upload-excel.component';
 import { UploadStocksComponent } from './components/upload-stocks/upload-stocks.component';
+import { UserPageComponent } from './Components/user-page/user-page.component';
+import { UserNavbarComponent } from './Components/user-navbar/user-navbar.component';
+import { ComparisonsComponent } from './Components/comparisons/comparisons.component';
+
 
 
 @NgModule({
@@ -44,7 +49,11 @@ import { UploadStocksComponent } from './components/upload-stocks/upload-stocks.
     ShowStocksComponent,
     ShowRegisteredCompanyComponent,
     UploadExcelComponent,
-    UploadStocksComponent
+    UploadStocksComponent,
+    UserPageComponent,
+    UserNavbarComponent,
+    ComparisonsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -56,12 +65,14 @@ import { UploadStocksComponent } from './components/upload-stocks/upload-stocks.
   providers: [
     ApiServiceService,
     LoginServiceService,
-    UserInfoService,
     CompanyServiceService,
     IpoService,
     StockExService,
     StocksService,
-    UploadExcelService
+    UploadExcelService,
+    StorageService,
+    UserService
+
   ],
   bootstrap: [AppComponent]
 })

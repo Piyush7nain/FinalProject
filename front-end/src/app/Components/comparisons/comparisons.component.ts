@@ -3,11 +3,11 @@ import { Company } from '../../models/Company'
 import { CompanyServiceService } from 'src/app/services/company-service.service';
 
 @Component({
-  selector: 'app-company',
-  templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css']
+  selector: 'app-comparisons',
+  templateUrl: './comparisons.component.html',
+  styleUrls: ['./comparisons.component.css']
 })
-export class CompanyComponent implements OnInit {
+export class ComparisonsComponent implements OnInit {
 
   constructor(private companyService: CompanyServiceService) { }
 
@@ -26,11 +26,12 @@ export class CompanyComponent implements OnInit {
   companyRegistered:boolean = false;
   showSearched:boolean = false;
   showEditBox:boolean = false;
+  companyName:string = '';
 
   ngOnInit(): void {
   }
 
-  companyName:string = '';
+
 
   onAdd(){
     this.company ={
@@ -51,18 +52,6 @@ export class CompanyComponent implements OnInit {
       this.companyNameList = data;
     })
 
-  }
-
-  addCompany(){
-    this.companyService.addNewCompany(this.company).subscribe(data =>{
-    this.companyRegistered = true;
-    this.showAddCompany = false;
-    if(data == 'successful'){
-      this.message = "Added " + this.company.companyName + " to Database";
-    }else if(data == "failed"){
-      this.message = "Company already exists in DataBase, try updating instead";
-    }
-    });
   }
 
   getAll(){
@@ -86,5 +75,6 @@ export class CompanyComponent implements OnInit {
       this.companyList = [data];
     })
   }
+
 
 }

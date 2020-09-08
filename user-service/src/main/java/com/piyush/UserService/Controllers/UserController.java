@@ -11,6 +11,7 @@ import com.piyush.UserService.shared.Header;
 import com.piyush.UserService.shared.UserAuthenticate;
 import com.piyush.UserService.shared.UserRequestModel;
 import com.piyush.UserService.shared.UserResponseModel;
+import com.piyush.UserService.shared.UserUpdateModel;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,5 +71,13 @@ public class UserController {
 	@GetMapping("/remove/all")
 	public ResponseEntity<String> removeAll()  {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.removeAll());
+	}
+
+	@PostMapping("/update/{userId}")
+	public ResponseEntity<Map<String, String>> updateUser(@RequestBody UserUpdateModel userUpdateModel, @PathVariable String userId){
+		Map<String, String> map = new HashMap<>();
+		map.put("status",userService.updateUser(userUpdateModel, userId));
+		return ResponseEntity.status(HttpStatus.OK).body(map);
+
 	}
 }

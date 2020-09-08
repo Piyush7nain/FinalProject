@@ -1,0 +1,47 @@
+<app-user-navbar></app-user-navbar>
+<div class="mt-5">
+<div class="container">
+  <div class="card mx-auto" style="width: 25rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{currentUser.userId}}</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">First Name: {{currentUser.firstName}}</li>
+        <li class="list-group-item">Last Name: {{currentUser.lastName}}</li>
+        <li class="list-group-item">Email : {{currentUser.email}}</li>
+      </ul>
+      <button class="btn btn-warning" (click)="onUpdate()">Update</button>
+    </div>
+    <div class="container"  *ngIf="showUpdateForm">
+      <form #updateForm ="ngForm" class="mx-auto">
+        <h6 class="alert alert-warning" > Only fill details which needs to be update, rest can be left blank</h6>
+        <div class="form-group">
+          <label>New User Id</label>
+          <input required class="form-control" type="text" name="userId" [(ngModel)]="updateUser.userId">
+        </div>
+        <div class="form-group">
+          <label>New First Name</label>
+          <input class="form-control" type="text" name="firstName" [(ngModel)]="updateUser.firstName">
+        </div>
+        <div class="form-group">
+          <label>New Last Name</label>
+          <input class="form-control" type="text" name="lastName" [(ngModel)]="updateUser.lastName">
+        </div>
+        <div class="form-group">
+          <label>Old Password</label>
+          <input required class="form-control" type="password" name="password" [(ngModel)]="updateUser.oldPassword">
+          <small style="color:orange;">Required to make any changes</small>
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input class="form-control" type="password" name="newPassword" [(ngModel)]="updateUser.newPassword">
+        </div>
+        <div class="form-group">
+          <label>New email</label>
+          <input class="form-control" type="text" name="email" [(ngModel)]="updateUser.email">
+        </div>
+        <button [disabled]="updateForm.form.invalid" class="btn btn-warning" (click)="update()">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

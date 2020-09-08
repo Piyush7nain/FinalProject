@@ -16,6 +16,8 @@ import com.piyush.UserService.shared.Header;
 import com.piyush.UserService.shared.UserAuthenticate;
 import com.piyush.UserService.shared.UserRequestModel;
 import com.piyush.UserService.shared.UserResponseModel;
+import com.piyush.UserService.shared.UserUpdateModel;
+
 import org.modelmapper.TypeToken;
 import java.lang.reflect.Type;
 
@@ -81,7 +83,7 @@ public class UserServiceImpl implements UserService {
 		Header header = new Header();	
 		User user = userRepository.findByUserIdIgnoreCaseAndPassword(userRequest.getUserId(), userRequest.getPassword());	
 		if(user == null){
-			header.setStatus("login-failed");
+			header.setStatus("failed");
 			return header;
 		}else{
 			header.setUserId(user.getUserId());
@@ -106,4 +108,26 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteAll();
 		return "Removed all users";
 	}
+
+	@Override
+	@Transactional
+	public String updateUser(UserUpdateModel userUpdateModel, String userId) {
+		User user = userRepository.findByUserIdIgnoreCaseAndPassword(userId, userUpdateModel.getOldPassword());
+		if(user == null){
+			return "failed";	
+		}else{
+			if(userUpdateModel.getNewPassword()!=null){
+				user.setPassword(userUpdateModel.getNewPassword());
+			}
+			user.setEmail(userUpdateModel.getEmail()!=null? userUpdateModel.getEmail():user.getEmail());
+			user.setFirstName(userUpdateModel.getFirstName()!=null? userUpdateModel.getFirstName():user.getFirstName());
+			user.setLastName(userUpdateModel.getLastName()!=null? userUpdateModel.getLastName():user.getLastName());
+			user.setUserId(userUpdateModel.getUserId()!=null? userUpdateModel.getUserId():user.getUserId());
+			logger.info("updated user -> {}",user);
+			return "successful";
+		}
+		
+	}
+
+	
 }

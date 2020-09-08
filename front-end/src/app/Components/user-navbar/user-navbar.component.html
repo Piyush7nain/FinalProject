@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark text-light ">
+  <a routerLink ="/" class="nav-brand mr-4"> StockExchange Management: User </a>
+  <button class="navbar-toggler" type ="button" data-toggle ="collapase" data-target="#navContent"
+  aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation" >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id ="navContent">
+    <ul class="navbar-nav ml-auto ">
+      <li class="nav-item">
+        <a routerLink ="/user-page" class="nav-link">Update profile</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink ="/comparisons" class="nav-link">Comparisons</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink ="/login" class="nav-link" (click) = "onLogout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
