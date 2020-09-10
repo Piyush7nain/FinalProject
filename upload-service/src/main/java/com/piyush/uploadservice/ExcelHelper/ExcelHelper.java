@@ -49,8 +49,7 @@ public class ExcelHelper {
                 continue;
             }
             StockPrices sp = new StockPrices(
-                    Integer.toString(
-                    (int) row.getCell(0, MissingCellPolicy.RETURN_BLANK_AS_NULL).getNumericCellValue()),
+                    row.getCell(0, MissingCellPolicy.RETURN_BLANK_AS_NULL).getStringCellValue(),
                     row.getCell(1, MissingCellPolicy.RETURN_BLANK_AS_NULL).getStringCellValue(),
                     row.getCell(2, MissingCellPolicy.RETURN_BLANK_AS_NULL).getNumericCellValue(),
                     row.getCell(3, MissingCellPolicy.RETURN_BLANK_AS_NULL).getDateCellValue(),
@@ -103,3 +102,6 @@ public class ExcelHelper {
     }
     
 }
+/* 
+Integer.toString(
+                    (int) row.getCell(0, MissingCellPolicy.RETURN_BLANK_AS_NULL).getNumericCellValue()) */

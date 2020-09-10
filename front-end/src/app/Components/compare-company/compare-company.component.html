@@ -14,15 +14,16 @@
         <!-- <option class="list-group-item"> {{companyName}}</option> -->
         <ul class="list-group">
           <li *ngFor="let company of companyNameList" class="list-group-item" >
-            <button class = "btn" (click)="getCompany(company.companyName)" >{{company.companyName}}</button>
+            <button class = "btn btn-outline-success btn-block" (click)="getCompany(company.companyName)" >{{company.companyName}}</button>
           </li>
         </ul>
       </li>
-      <li class="nav-item ml-2 mr-5">
-        <button class="btn btn-outline-success " type="submit">Search</button>
-      </li>
+
       <li class="nav-item ml-5">
         <button class="btn btn-outline-success " type="submit" (click) ="getAll()">All Companies</button>
+      </li>
+      <li class="nav-item ml-5">
+        <button class="btn btn-outline-success " type="submit" (click) ="onShowChart()"> Charts </button>
       </li>
   </ul>
   </div>
@@ -32,5 +33,9 @@
   <div *ngFor="let oneCompany of companyList">
     <app-show-company [company]="oneCompany" [isAdmin]="this.isAdmin" ></app-show-company>
   </div>
+</div>
+
+<div *ngIf="showChart">
+  <app-charts [companies]="this.companyList"></app-charts>
 </div>
 

@@ -9,6 +9,7 @@
           <td>Current Price</td>
           <td>Date</td>
           <td>Time</td>
+          <td *ngIf="isAdmin">Remove</td>
         </tr>
       </thead>
       <tbody >
@@ -18,6 +19,7 @@
           <td> {{stock.currentPrice}}</td>
           <td> {{stock.date | date}}</td>
           <td> {{stock.time}}</td>
+          <td *ngIf="isAdmin"><button class="btn btn-danger" (click)="removeStock(stock)">Remove</button></td>
         </tr>
       </tbody>
     </table>

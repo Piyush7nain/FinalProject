@@ -25,24 +25,24 @@
 <div *ngIf="showAddForm">
     <div class="container my-3">
         <div class="text-center"><h2> Add New Stock Exchange</h2></div>
-        <form>
+        <form #addStockExForm = "ngForm">
             <div class="form-group">
               <label >Stock Exchange Name</label>
-              <input class="form-control" type="text" name="stockExName" [(ngModel)] ="stockEx.stockExName">
+              <input required class="form-control" type="text" name="stockExName" [(ngModel)] ="stockEx.stockExName">
             </div>
             <div class="form-group">
               <label>Stock Code</label>
-              <input  class="form-control" type="text" name="stockCode"[(ngModel)] ="stockEx.code">
+              <input required class="form-control" type="text" name="stockCode"[(ngModel)] ="stockEx.code">
             </div>
             <div class="form-group">
               <label>Info</label>
-              <input  class="form-control" type="text" name="turnover"[(ngModel)] ="stockEx.info">
+              <input required class="form-control" type="text" name="turnover"[(ngModel)] ="stockEx.info">
             </div>
             <div class="form-group">
               <label>Address</label>
-              <input class="form-control" type="text" name="address"[(ngModel)] ="stockEx.address">
+              <input required class="form-control" type="text" name="address"[(ngModel)] ="stockEx.address">
             </div>
-            <button class="btn btn-success btn-block" (click) ="addStockEx()"> Add </button>
+            <button class="btn btn-success btn-block" [disabled]="addStockExForm.form.invalid" (click) ="addStockEx()"> Add </button>
         </form>
     </div>
 </div>

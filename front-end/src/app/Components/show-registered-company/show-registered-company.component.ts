@@ -53,4 +53,12 @@ export class ShowRegisteredCompanyComponent implements OnInit {
     })
   }
 
+  removeCompany(company:RegisteredCompany){
+    this.stockExService.removeCompany(company).subscribe(data=>{
+      if(data.status=="successful"){
+        this.registeredCompanies = this.registeredCompanies.filter(com => com.companyCode != company.companyCode);
+      }
+    })
+  }
+
 }

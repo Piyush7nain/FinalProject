@@ -26,4 +26,6 @@ public interface ExchangeService {
 
 	String removeEx(String code) throws StockNotFoundException;
 
+	String removeCompany(CompanyStockCodes company);
+
 }

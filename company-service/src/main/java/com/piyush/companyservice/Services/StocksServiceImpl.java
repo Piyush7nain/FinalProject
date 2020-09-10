@@ -33,7 +33,7 @@ public class StocksServiceImpl implements StocksService {
         if(company == null){throw new CompanyNotFoundException("No company found with name "+ name);}
         List<String> codes = codesRepository.findByCompanyNameIgnoreCase(company.getCompanyName());
         if(codes == null){throw new RegistrationError("Company might not be registered with any StockExchages");}
-        List<StockPrices> stocks = stockPriceRepository.findByCompanyCodeIgnoreCaseInOrderByDate(codes);
+        List<StockPrices> stocks = stockPriceRepository.findByCompanyCodeIgnoreCaseInOrderByDateTime(codes);
         return stocks;
     }
 
@@ -85,7 +85,7 @@ public class StocksServiceImpl implements StocksService {
         Optional<StockPrices> stock = stockPriceRepository.findById(id);
         stock.orElseThrow(() -> new StockNotFoundException("No Ipo found with id "+ id));
         stockPriceRepository.delete(stock.get());
-        return "Removed stock with id " +id;
+        return "successful";
     }
 
     @Override

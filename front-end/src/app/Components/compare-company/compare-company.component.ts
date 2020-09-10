@@ -21,54 +21,41 @@ export class CompareCompanyComponent implements OnInit {
      showIpo:false
   }
 
-  message:string;
-  showAddCompany:boolean = false;
-  companyRegistered:boolean = false;
+
   showSearched:boolean = false;
-  showEditBox:boolean = false;
   companyName:string = '';
   isAdmin:boolean=false;
+  showChart:boolean=false;
 
   ngOnInit(): void {
   }
 
 
-
-  onAdd(){
-    this.searchedCompany ={
-      companyName: '',
-      companyDetails:'',
-      sectorName: '',
-      turnover:null,
-      showIpo:false
-    };
-    this.showAddCompany = !this.showAddCompany;
-    this.showSearched = false;
-    this.companyRegistered = false;
+  onShowChart(){
+    this.showSearched=false;
+    this.showChart=!this.showChart;
+    this.companyService.getAll().subscribe(data =>{
+      this.companyList = data;
+      console.log(this.companyList)
+    })
   }
-
   onChange(){
     // console.log(this.companyName);
     this.companyService.getByLikeName(this.companyName).subscribe(data =>{
       this.companyNameList = data;
     })
-
   }
 
   getAll(){
-    this.showAddCompany = false;
-    this.companyRegistered = false;
-    this.showSearched = true;
+    this.showSearched = !this.showSearched;
+    this.showChart=false;
     this.companyService.getAll().subscribe(data =>{
-
       this.companyList = data;
       console.log(this.companyList)
     })
   }
 
   getCompany(name:string){
-    this.showAddCompany = false;
-    this.companyRegistered = false;
     this.showSearched = true;
     this.companyNameList= [];
     this.companyName ='';

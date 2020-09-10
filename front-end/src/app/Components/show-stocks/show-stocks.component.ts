@@ -79,4 +79,13 @@ export class ShowStocksComponent implements OnInit {
     })
   }
 
+  removeStock(stock:Stock){
+    let id = stock.id;
+    this.stockService.removeById(id).subscribe(data=>{
+      if(data.status == "successful"){
+        this.stocks = this.stocks.filter(stk => stk.id != stock.id);
+      }
+    })
+  }
+
 }

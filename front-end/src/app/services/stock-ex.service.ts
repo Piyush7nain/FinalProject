@@ -9,7 +9,8 @@ export class StockExService {
 
   constructor(private apiService: ApiServiceService) { }
 
-  baseUrl ="company-service/exchange/"
+  baseUrl ="company-service/exchange/";
+
   getAllExchanges():Observable<any>{
     let list:BehaviorSubject<any> = new BehaviorSubject<any>([]);
     this.apiService.get(this.baseUrl+ '/all').subscribe(data=>{
@@ -51,6 +52,15 @@ export class StockExService {
     this.apiService.post(this.baseUrl +"/registerCompany", obj).subscribe(data =>{
       console.log(data);
       status.next(data)
+    })
+    return status;
+  }
+
+  removeCompany(company:any):Observable<any>{
+    let status: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    this.apiService.post(this.baseUrl+"/remove/company", company).subscribe(data=>{
+      console.log(data);
+      status.next(data);
     })
     return status;
   }

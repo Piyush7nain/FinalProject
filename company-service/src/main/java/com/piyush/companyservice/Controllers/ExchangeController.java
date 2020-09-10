@@ -87,5 +87,12 @@ public class ExchangeController {
         return ResponseEntity.status(HttpStatus.OK).body(exchangeService.removeEx(code));
     }
 
+    @PostMapping("/remove/company")
+    public ResponseEntity<Map<String, String>> removeCompany(@RequestBody CompanyStockCodes company){
+        Map<String, String> map = new HashMap<>();
+        map.put("status", exchangeService.removeCompany(company));
+        return ResponseEntity.status(HttpStatus.OK).body(map);
+    }
+
     
 }

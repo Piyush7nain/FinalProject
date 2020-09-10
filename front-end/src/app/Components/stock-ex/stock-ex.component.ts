@@ -46,6 +46,7 @@ export class StockExComponent implements OnInit {
   addStockEx(){
     this.showAddForm= false;
     this.showMessage = true;
+    this.showUpload = false;
     this.stockExService.addStock(this.stockEx).subscribe(data=>{
       if(data.status == 'successful'){
         this.message = "Added New Stock Exchange to Database";

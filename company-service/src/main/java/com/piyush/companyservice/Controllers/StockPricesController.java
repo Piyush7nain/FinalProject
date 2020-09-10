@@ -83,8 +83,10 @@ public class StockPricesController {
     }
 
     @GetMapping("/remove/{id}")
-    public ResponseEntity<String> removeStocks(@PathVariable Integer id) throws StockNotFoundException{
-        return ResponseEntity.status(HttpStatus.OK).body(stocksService.removeStock(id));
+    public ResponseEntity<Map<String, String>> removeStocks(@PathVariable Integer id) throws StockNotFoundException{
+        Map<String, String> map = new HashMap<>();
+        map.put("status",stocksService.removeStock(id));
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
     @GetMapping("/remove/all")

@@ -31,6 +31,16 @@ import { ShowCompanyComponent } from './components/show-company/show-company.com
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 import { UserLandingComponent } from './components/user-landing/user-landing.component';
 import { CompareCompanyComponent } from './components/compare-company/compare-company.component';
+import { ChartsComponent } from './components/charts/charts.component';
+
+import { FusionChartsModule } from 'angular-fusioncharts';
+// Import FusionCharts library and chart modules
+import * as FusionCharts from 'fusioncharts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
+import { ShowChartComponent } from './components/show-chart/show-chart.component'; // Import timeseries
+// Pass the fusioncharts library and timeseries modules
+FusionChartsModule.fcRoot(FusionCharts,Charts, TimeSeries);
 
 
 @NgModule({
@@ -51,7 +61,9 @@ import { CompareCompanyComponent } from './components/compare-company/compare-co
     ShowCompanyComponent,
     UserNavbarComponent,
     UserLandingComponent,
-    CompareCompanyComponent
+    CompareCompanyComponent,
+    ChartsComponent,
+    ShowChartComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +71,10 @@ import { CompareCompanyComponent } from './components/compare-company/compare-co
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FusionChartsModule
   ],
+
+
   providers: [
     ApiServiceService,
     LoginServiceService,

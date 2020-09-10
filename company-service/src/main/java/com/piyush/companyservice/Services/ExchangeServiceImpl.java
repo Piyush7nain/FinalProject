@@ -100,5 +100,15 @@ public class ExchangeServiceImpl implements ExchangeService {
         exchangeRepository.delete(ex.get());
         return "Removed " + ex.get().getStockExName() + " from DataBase";
     }
+
+    @Override
+    public String removeCompany(CompanyStockCodes csc) {
+        List<CompanyStockCodes> codes = codesRepository.findByCompanyCodeIgnoreCaseAndCompanyNameIgnoreCaseAndStockCodeIgnoreCase(
+                                csc.getCompanyCode(),
+                                csc.getcompanyName(),
+                                csc.getStockCode());
+        codesRepository.deleteAll(codes);
+        return "successful";
+    }
     
 }
