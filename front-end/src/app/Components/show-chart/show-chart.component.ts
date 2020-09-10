@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as FusionCharts from 'fusioncharts';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-show-chart',
@@ -8,9 +9,12 @@ import * as FusionCharts from 'fusioncharts';
 })
 export class ShowChartComponent implements OnInit {
 
-  constructor() {}
+  constructor(private chartService: ChartService) {
+
+  }
 
   ngOnInit(): void {
+    this.chartService.getChartData().subscribe(data => this.data = data);
     this.dataSource = {
       data: null,
       caption: {
@@ -33,7 +37,7 @@ export class ShowChartComponent implements OnInit {
     this.assignData();
   }
 
-  @Input()
+  //@Input()
   data:any
   schema = [
     {

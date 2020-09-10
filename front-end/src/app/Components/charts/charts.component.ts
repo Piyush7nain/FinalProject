@@ -4,6 +4,7 @@ import { CompareInput } from '../../models/CompareInput';
 import { ChartData } from '../../models/ChartData';
 import { StocksService } from 'src/app/services/stocks.service';
 import { Stock } from 'src/app/models/Stock';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-charts',
@@ -12,7 +13,8 @@ import { Stock } from 'src/app/models/Stock';
 })
 export class ChartsComponent implements OnInit {
 
-  constructor(private stocksService: StocksService) { }
+  constructor(private stocksService: StocksService,
+     private chartService: ChartService) { }
 
   ngOnInit(): void {
     this.compareInput={
@@ -62,6 +64,7 @@ export class ChartsComponent implements OnInit {
       data.currentPrice = element.currentPrice;
       this.dataSource.push(data);
     });
+    this.chartService.updateChartData(this.dataSource);
     this.responseData = new Array();
     this.showChart= true;
     console.log(this.dataSource)

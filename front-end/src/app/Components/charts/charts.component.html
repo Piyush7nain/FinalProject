@@ -53,9 +53,12 @@
   </div>
 
 </div>
-<!-- <button (click)="printResponse()">Action</button> -->
+
+<!-- <button (click)="printResponse()">Action</button>
+[data]="this.dataSource"
+-->
 
 <div *ngIf="showChart">
-  <app-show-chart [data]="this.dataSource"></app-show-chart>
+  <app-show-chart ></app-show-chart>
   <button class="btn btn-danger btn-block" (click)="this.showChart =false">Close Chart</button>
 </div>

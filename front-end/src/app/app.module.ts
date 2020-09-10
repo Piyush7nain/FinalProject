@@ -12,6 +12,7 @@ import { StocksService } from '../app/services/stocks.service';
 import { UploadExcelService } from '../app/services/upload-excel.service';
 import { StorageService } from  '../app/services/storage.service';
 import { UserService } from '../app/services/user.service';
+import { ChartService } from '../app/services/chart.service'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -84,7 +85,8 @@ FusionChartsModule.fcRoot(FusionCharts,Charts, TimeSeries);
     StocksService,
     UploadExcelService,
     StorageService,
-    UserService
+    UserService,
+    ChartService
 
   ],
   bootstrap: [AppComponent]
